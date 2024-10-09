@@ -1,0 +1,1 @@
+[{"login":"admin","senha":"senha123","nome":"Admin User","CPF":"00000000000","email":"admin@example.com","admin":true,"mailBox":[],"ID":"d4cb27ef-47aa-44f8-9445-8700e16d0013"},{"login":"johndoe","senha":"senha123","nome":"John Doe","CPF":"12345678901","email":"john.doe@example.com","admin":false,"mailBox":[],"ID":"4b09faf8-96a4-4959-be2a-7b16c441790f"}]
