@@ -378,4 +378,8 @@
             System.out.println(seat);
             eventService.removeSeatEvent(event, seat);
         }
+
+        public List<Ingresso> getUserIngressos(Usuario user){
+            return purchaseService.getBoughTicket(user.getID());
+        }
     }
