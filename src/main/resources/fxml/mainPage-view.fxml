@@ -32,7 +32,7 @@
         <Region prefHeight="15"/>
         <Button fx:id="editButton" styleClass="button-menu" onMouseClicked="#handleCard"/>
         <Region prefHeight="15"/>
-        <Button fx:id="seePurchasesButton" styleClass="button-menu" />
+        <Button fx:id="seePurchasesButton" styleClass="button-menu" onMouseClicked="#handleTickets"/>
         <Region prefHeight="15"/>
         <Button fx:id="changeLanguage" styleClass="button-menu" onMouseClicked="#changeLanguage"/>
         <Region prefHeight="15"/>

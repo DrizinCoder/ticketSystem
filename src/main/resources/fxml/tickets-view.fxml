@@ -9,13 +9,17 @@
 <StackPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.pbl.viewController.ticketsController"
-            prefHeight="400.0" prefWidth="600.0">
+            stylesheets="@style/ticketStyle.css"
+            prefHeight="400.0" prefWidth="600.0"
+            styleClass="menu-container">
 
-    <VBox>
-        <Label fx:id="events" styleClass="labelEvent-message"/>
+    <VBox alignment="TOP_CENTER" spacing="20" styleClass="event-container">
+        <Label fx:id="tickets" styleClass="labelEvent-message"/>
 
-        <VBox fx:id="eventContainer" alignment="TOP_CENTER" spacing="15" prefWidth="350">
+        <VBox fx:id="ticketsContainer" alignment="TOP_CENTER" spacing="15" prefWidth="350">
         </VBox>
     </VBox>
+
+    <Button fx:id="changeLanguage" styleClass="button-menu" onMouseClicked="#changeLanguage"/>
 
 </StackPane>

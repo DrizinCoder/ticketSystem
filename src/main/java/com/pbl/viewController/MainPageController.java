@@ -166,4 +166,8 @@ public class MainPageController implements RequiresMainController, RequiresUser,
     public void handleCard(MouseEvent mouseEvent) throws IOException {
         navigatorController.showCard();
     }
+
+    public void handleTickets(MouseEvent mouseEvent) throws IOException {
+        navigatorController.showTickets();
+    }
 }

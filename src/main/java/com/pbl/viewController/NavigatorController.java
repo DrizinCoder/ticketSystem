@@ -105,6 +105,10 @@ public class NavigatorController {
         loadScene("/fxml/cardManagement-view.fxml");
     }
 
+    public void showTickets() throws  IOException{
+        loadScene("/fxml/tickets-view.fxml");
+    }
+
     public void comeback() throws IOException {
         if(!sceneStack.empty()) {
             Scene scene = sceneStack.pop();
