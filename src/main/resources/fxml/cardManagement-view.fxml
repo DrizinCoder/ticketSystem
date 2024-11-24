@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.pbl.viewController.CardManagmentController"
+           stylesheets="@style/cadastroCartaoStyle.css"
+           styleClass="stack-pane">
+
+    <VBox alignment="CENTER_LEFT" spacing="20" maxWidth="600" maxHeight="700" minWidth="600" minHeight="700"
+          styleClass="vbox-loginBox">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <!-- Título do formulário -->
+        <Label fx:id="cardTitle" text="Gerênciamento de Cartão" styleClass="text-title" alignment="CENTER"/>
+        <Region prefHeight="15"/>
+
+        <!-- Campos do formulário -->
+        <TextField fx:id="cardHolderNameField" promptText="Nome do Titular" styleClass="text-field"/>
+        <TextField fx:id="cardNumberField" promptText="Número do Cartão" styleClass="text-field"/>
+        <DatePicker fx:id="expiryDatePicker" promptText="Data de Validade" styleClass="date-picker"/>
+        <TextField fx:id="cvvField" promptText="CVV" styleClass="text-field"/>
+
+        <Region prefHeight="10"/>
+
+        <!-- Botão para cadastrar -->
+        <Button fx:id="addCardButton" onAction="#handleAddCard" text="Adicionar Cartão" styleClass="button-login"
+                maxWidth="300"/>
+
+        <Region prefHeight="20"/>
+
+        <!-- Lista de cartões -->
+        <Label fx:id="cardTitle2" text="Cartões Cadastrados" styleClass="text-subtitle" alignment="CENTER"/>
+        <ScrollPane fx:id="cardListScrollPane" fitToWidth="true" styleClass="scroll-pane-custom">
+            <VBox fx:id="cardListContainer" alignment="TOP_CENTER" spacing="15" styleClass="card-list-container"/>
+        </ScrollPane>
+
+        <Region prefHeight="20"/>
+
+        <Button fx:id="backButton" onAction="#handleBackButton" text="voltar" styleClass="button-cancel"
+                        maxWidth="300"/>
+
+        <Button fx:id="languageToggle" onMouseClicked="#changeLanguage" styleClass="button-cancel" maxWidth="300"/>
+    </VBox>
+
+</StackPane>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.pbl.viewController.SignupController"
+           stylesheets="@style/signupStyle.css"
+           styleClass="stack-pane">
+
+    <VBox alignment="CENTER" spacing="10" maxWidth="500" maxHeight="500" minWidth="500" minHeight="500"
+          styleClass="vbox-loginBox">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+        <spacing>10</spacing>
+
+        <!-- Definindo um título -->
+        <Label fx:id="titleLabel" styleClass="text-title"/>
+        <Label fx:id="subtitleLabel" styleClass="text-subtitle"/>
+
+        <!-- Região de espaçamento -->
+        <Region prefHeight="5"/>
+
+        <!-- Campos de entrada -->
+        <TextField fx:id="loginField" styleClass="text-field"/>
+        <PasswordField fx:id="passwordField" styleClass="password-field"/>
+        <TextField fx:id="usernameField" styleClass="text-field"/>
+        <TextField fx:id="CpfField" styleClass="text-field"/>
+        <TextField fx:id="emailField" styleClass="text-field"/>
+
+        <!-- Região de espaçamento -->
+        <Region prefHeight="15"/>
+
+        <!-- Botão de Login com largura 100% -->
+        <Button fx:id="confirmButton" onAction="#handleCadastrarButton" styleClass="button-login"
+                maxWidth="Infinity" />
+
+        <!-- Botão de Cancelar com largura 100% -->
+        <Button fx:id="backButton" onAction="#handleCancelButton" styleClass="button-cancel"
+                maxWidth="Infinity" />
+
+        <Button fx:id="languageToggle" styleClass="button-cancel" onMouseClicked="#changeLanguage"
+                maxWidth="Infinity"/>
+
+        <!-- Região de espaçamento -->
+        <Region prefHeight="1"/>
+
+        <Label fx:id="messageLabel" styleClass="label-message"/>
+    </VBox>
+
+</StackPane>

@@ -1,0 +1,8 @@
+.login-warning{
+    -fx-background-color: white;
+    -fx-background-radius: 15; /* Arredonda o fundo */
+    -fx-border-radius: 15;     /* Arredonda a borda */
+    -fx-border-color: #D3D3D3;
+    -fx-border-width: 2;
+    -fx-padding: 10;
+}

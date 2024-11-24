@@ -1,0 +1,30 @@
+[
+  {
+    "userName": "Maria Oliveira",
+    "comment": "Ótima experiência, recomendo!",
+    "rating": 5,
+    "eventID": "3c8d8abb-9408-4ce1-9819-98721707c2ad",
+    "ID": "3c8d9abb-9408-4ce1-9719-98721707c2ad"
+  },
+  {
+    "userName": "Carlos Pereira",
+    "comment": "Muito bom, só faltou melhorar o som.",
+    "rating": 4,
+    "eventID": "3c8d8abb-9408-4ce1-9819-98721707c2ad",
+    "ID": "3c8d7abb-9408-4ce1-9719-98721707c2ad"
+  },
+  {
+    "userName": "Ana Souza",
+    "comment": "Gostei bastante, comida ótima!",
+    "rating": 4.0,
+    "eventID": "3c8d8abb-9408-4ce1-9819-98721707c2ad",
+    "ID": "3c8d8abb-9408-4ce1-9719-98723707c2ad"
+  },
+  {
+    "userName": "Pedro Lima",
+    "comment": "Achei desorganizado e com atrasos.",
+    "rating": 3.0,
+    "eventID": "3c8d8abb-9408-4ce1-9819-98721707c2ad",
+    "ID": "3c8d8abb-9408-4ce1-9719-98722707c2ad"
+  }
+]

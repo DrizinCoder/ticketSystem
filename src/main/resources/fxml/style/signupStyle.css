@@ -1,0 +1,97 @@
+/* loginStyles.css */
+
+.text-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F4F6F7;
+}
+
+.text-subtitle {
+    -fx-font-size: 16px;
+    -fx-font-style: italic;
+    -fx-text-fill: #F4F6F7;
+}
+
+.text-field {
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-style: solid;
+    -fx-border-color: #BDC3C7;
+    -fx-text-fill: #f1f1f1;
+    -fx-prompt-text-fill: #7F8C8D;
+}
+
+.password-field {
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-style: solid;
+    -fx-border-color: #BDC3C7;
+    -fx-text-fill: #f1f1f1;
+    -fx-prompt-text-fill: #7F8C8D;
+}
+
+.button-login {
+    -fx-background-color: rgb(22, 160, 133);
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-pref-width: 80%;
+}
+
+.button-login:hover{
+    -fx-background-color: #1ABC9C;
+    -fx-cursor: hand;
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
+}
+
+.button-login:pressed{
+    -fx-background-color: #148F77;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}
+
+.button-cancel {
+    -fx-background-color: rgba(189, 195, 199, 0.02);
+    -fx-border-color: rgba(200, 200, 200, 0.4);
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-pref-width: 80%;
+}
+
+.button-cancel:hover{
+    -fx-background-color: rgba(166, 172, 175, 0.10);
+    -fx-cursor: hand;
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
+}
+
+.button-cancel:pressed{
+    -fx-background-color: rgba(133, 146, 158, 0.1);
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}
+
+.label-message {
+    -fx-text-fill: #F4F6F7;
+    -fx-font-style: italic;
+}
+
+.stack-pane {
+    -fx-background-color: linear-gradient(to bottom, #1B1B1D, #2C3E50);
+    -fx-background-image: url("/fxml/images/background.png");  /* Caminho para a imagem */
+    -fx-background-size: cover;   /* Faz com que a imagem cubra todo o StackPane */
+    -fx-background-position: center center;  /* Centraliza a imagem no StackPane */}
+
+.vbox-loginBox{
+    /*-fx-border-color: rgba(250, 250, 251, 0.1);*/
+    -fx-background-color: rgba(255, 255, 255, 0.02);
+    -fx-pref-width: 400px;  /* Largura fixa */
+    -fx-pref-height: 400px; /* Altura fixa */
+    -fx-alignment: center;  /* Para centralizar o conteúdo */
+    -fx-border-radius: 5;
+}
+
+.vbox-loginBoxHeader{
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}

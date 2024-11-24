@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.beans.property.DoubleProperty?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="com.pbl.viewController.MainPageController"
+          stylesheets="@style/mainPage.css"
+          prefHeight="400.0" prefWidth="600.0">
+
+    <!-- Definindo as colunas -->
+    <columnConstraints>
+        <ColumnConstraints percentWidth="20" hgrow="ALWAYS"/>  <!-- Menu de Navegação -->
+        <ColumnConstraints percentWidth="80" hgrow="ALWAYS"/>  <!-- Área de Exibição de Eventos -->
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS"/>
+    </rowConstraints>
+
+    <!-- Menu de Navegação -->
+    <VBox alignment="CENTER" spacing="20" styleClass="menu-container">
+        <Region prefHeight="50"/>
+        <Label fx:id="username" styleClass="label-message" wrapText="true"/>
+        <Region prefHeight="30"/>
+        <Button fx:id="profile" styleClass="button-menu" onMouseClicked="#handleProfile"/>
+        <Region prefHeight="15"/>
+        <Button fx:id="editButton" styleClass="button-menu" onMouseClicked="#handleCard"/>
+        <Region prefHeight="15"/>
+        <Button fx:id="seePurchasesButton" styleClass="button-menu" />
+        <Region prefHeight="15"/>
+        <Button fx:id="changeLanguage" styleClass="button-menu" onMouseClicked="#changeLanguage"/>
+        <Region prefHeight="15"/>
+        <Button fx:id="logoutButton" styleClass="button-menu" onAction="#handleLogout"/>
+        <Region prefHeight="50"/>
+    </VBox>
+
+    <!-- Área de Exibição de Eventos -->
+    <VBox GridPane.columnIndex="1" alignment="TOP_CENTER" spacing="20" styleClass="event-container">
+        <Label fx:id="events" styleClass="labelEvent-message"/>
+
+        <VBox fx:id="eventContainer" alignment="TOP_CENTER" spacing="15" prefWidth="350">
+        </VBox>
+    </VBox>
+
+</GridPane>

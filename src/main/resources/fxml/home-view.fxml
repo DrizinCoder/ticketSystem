@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.pbl.viewController.HomeController"
+            stylesheets="@style/loginStyle.css"
+            prefHeight="400.0" prefWidth="600.0"
+            styleClass="stack-pane">
+
+    <VBox alignment="CENTER" spacing="10" maxWidth="300" maxHeight="300" minWidth="300" minHeight="300">
+        <Button fx:id="loginButton" onAction="#handleLoginButton" styleClass="button-login"
+        maxWidth="Infinity"/>
+        <Button fx:id="signUpButton" onAction="#handleSignUpButton" styleClass="button-cancel"
+                maxWidth="Infinity"/>
+        <Button fx:id="languageToggle" styleClass="button-cancel" onMouseClicked="#changeLanguage"
+                maxWidth="Infinity"/>
+    </VBox>
+
+
+</StackPane>

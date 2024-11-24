@@ -1,0 +1,39 @@
+.button-login {
+    -fx-background-color: #2ECC71;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-pref-width: 80%;
+}
+
+.button-login:hover{
+    -fx-background-color: #27AE60;
+    -fx-cursor: hand;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.button-login:pressed{
+    -fx-background-color: #1E8449;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}
+
+.button-signUp {
+    -fx-background-color: #2e85cc;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-pref-width: 80%;
+}
+
+.button-signUp:hover{
+    -fx-background-color: #276bae;
+    -fx-cursor: hand;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.button-signUp:pressed{
+    -fx-background-color: #1e3b84;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}
