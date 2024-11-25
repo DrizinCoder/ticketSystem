@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -72,7 +73,18 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
             Label dataLabel = new Label(e.getAssento());
             dataLabel.getStyleClass().add("event-date");
 
-            vbox.getChildren().addAll(tittleLabel, descriptionLabel, dataLabel);
+            Button actionButton = new Button("Avaliar evento");
+            actionButton.getStyleClass().add("button-cancel");
+            actionButton.setOnAction(x -> {
+                handleReviewButton();
+            });
+
+            // Colocar data e botão dentro de uma HBox
+            HBox hbox = new HBox();
+            hbox.setSpacing(940); // Espaçamento horizontal
+            hbox.getChildren().addAll(dataLabel, actionButton);
+
+            vbox.getChildren().addAll(tittleLabel, descriptionLabel, hbox);
 
             ticketsContainer.getChildren().add(vbox);
         }
@@ -99,6 +111,10 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
     @Override
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
+    }
+
+    public void handleReviewButton(){
+
     }
 
     public void hangleBackButton(MouseEvent mouseEvent) throws IOException {

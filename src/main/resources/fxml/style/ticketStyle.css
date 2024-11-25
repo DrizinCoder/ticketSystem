@@ -69,3 +69,24 @@
     -fx-background-color: transparent;
     -fx-padding: 20px;
 }
+
+.button-cancel {
+    -fx-background-color: rgba(189, 195, 199, 0.02);
+    -fx-border-color: rgba(200, 200, 200, 0.4);
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.button-cancel:hover{
+    -fx-background-color: rgba(166, 172, 175, 0.10);
+    -fx-cursor: hand;
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
+}
+
+.button-cancel:pressed{
+    -fx-background-color: rgba(133, 146, 158, 0.1);
+    -fx-cursor: normal  ;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}
