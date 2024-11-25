@@ -31,6 +31,9 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
     @FXML
     private VBox ticketsContainer;
 
+    @FXML
+    private Button backButton;
+
     public void initialize() {
         LanguageManager.registerListener(this);
     }
@@ -90,10 +93,15 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
     public void updateLanguage() {
         tickets.setText(LanguageManager.getString("tickets.title"));
         changeLanguage.setText(LanguageManager.getString("menu.changeLanguage"));
+        backButton.setText(LanguageManager.getString("button.cancel"));
     }
 
     @Override
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
+    }
+
+    public void hangleBackButton(MouseEvent mouseEvent) throws IOException {
+        navigatorController.comeback();
     }
 }
