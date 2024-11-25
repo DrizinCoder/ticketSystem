@@ -5,11 +5,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<StackPane xmlns="http://javafx.com/javafx"
+<GridPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.pbl.viewController.CardManagmentController"
            stylesheets="@style/cadastroCartaoStyle.css"
            styleClass="stack-pane">
+
+    <columnConstraints>
+        <ColumnConstraints percentWidth="50" hgrow="ALWAYS"/>  <!-- Nome descrição e data do evento -->
+        <ColumnConstraints percentWidth="50" hgrow="ALWAYS"/><!-- Sessão de comentários e avaliação -->
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS"/>
+    </rowConstraints>
 
     <VBox alignment="CENTER_LEFT" spacing="20" maxWidth="600" maxHeight="700" minWidth="600" minHeight="700"
           styleClass="vbox-loginBox">
@@ -34,9 +43,14 @@
                 maxWidth="300"/>
 
         <Region prefHeight="20"/>
+    </VBox>
+
+    <VBox GridPane.columnIndex="1" alignment="CENTER_RIGHT" spacing="20" maxWidth="600" maxHeight="700"
+          minWidth="600" minHeight="700" styleClass="vbox-loginBox">
 
         <!-- Lista de cartões -->
-        <Label fx:id="cardTitle2" text="Cartões Cadastrados" styleClass="text-subtitle" alignment="CENTER"/>
+        <Label fx:id="cardTitle2" text="Cartões Cadastrados" styleClass="text-title" alignment="CENTER"/>
+        <Region prefHeight="15"/>
         <ScrollPane fx:id="cardListScrollPane" fitToWidth="true" styleClass="scroll-pane-custom">
             <VBox fx:id="cardListContainer" alignment="TOP_CENTER" spacing="15" styleClass="card-list-container"/>
         </ScrollPane>
@@ -45,8 +59,7 @@
 
         <Button fx:id="backButton" onAction="#handleBackButton" text="voltar" styleClass="button-cancel"
                         maxWidth="300"/>
-
         <Button fx:id="languageToggle" onMouseClicked="#changeLanguage" styleClass="button-cancel" maxWidth="300"/>
     </VBox>
 
-</StackPane>
+</GridPane>

@@ -13,9 +13,11 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -57,10 +59,17 @@ public class CardManagmentController implements RequiresMainController, Requires
     private Label cardTitle2;
 
     @FXML
-    private Button languageToggle;;
+    private Button languageToggle;
+
+    private Text ExpiryDate;
+    private Text CardNumberInfo;
 
     public void initialize() {
         LanguageManager.registerListener(this);
+        ExpiryDate = new Text();
+        ExpiryDate.setText(LanguageManager.getString("ExpiryDate"));
+        CardNumberInfo = new Text();
+        CardNumberInfo.setText(LanguageManager.getString("CardNumberInfo"));
     }
 
     @Override
@@ -155,6 +164,7 @@ public class CardManagmentController implements RequiresMainController, Requires
 
     public void loadCard(){
         List<Card> cards = mainController.getUserCards(user.getID());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
         cardListContainer.getChildren().clear();
 
@@ -163,10 +173,11 @@ public class CardManagmentController implements RequiresMainController, Requires
             vbox.setSpacing(10);
             vbox.getStyleClass().add("event-box");
 
-            Label tittleLabel = new Label(c.getCardNumber());
+            Label tittleLabel = new Label(CardNumberInfo.getText()+ ": " + c.getCardNumber());
             tittleLabel.getStyleClass().add("event-title");
 
-            Label dataLabel = new Label(c.getExpiryDate().toString());
+            String FormattedDate = formatter.format(c.getExpiryDate());
+            Label dataLabel = new Label(ExpiryDate.getText() + ": " + FormattedDate);
             dataLabel.getStyleClass().add("event-date");
 
             Button actionButton = new Button("Deletar");
@@ -198,6 +209,8 @@ public class CardManagmentController implements RequiresMainController, Requires
         backButton.setText(LanguageManager.getString("button.cancel"));
         cardTitle2.setText(LanguageManager.getString("card.title2"));
         languageToggle.setText(LanguageManager.getString("button.language"));
+        ExpiryDate.setText(LanguageManager.getString("ExpiryDate"));
+        CardNumberInfo.setText(LanguageManager.getString("CardNumberInfo"));
     }
 
     public void changeLanguage(MouseEvent mouseEvent) {
@@ -209,6 +222,7 @@ public class CardManagmentController implements RequiresMainController, Requires
             LanguageManager.languageController = 0;
         }
         LanguageManager.notifyListeners();
+        loadCard();
     }
 
     @Override

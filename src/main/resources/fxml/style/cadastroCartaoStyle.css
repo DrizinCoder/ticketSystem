@@ -77,6 +77,8 @@
     -fx-background-color: rgba(44, 62, 80, 0.15);
     -fx-padding: 15px;
     -fx-spacing: 10px;
+    -fx-margin-right: 5px; /* Adiciona espaço à direita */
+    -fx-margin-left: 5px; /* Adiciona espaço à esquerda */
 }
 
 .stack-pane {

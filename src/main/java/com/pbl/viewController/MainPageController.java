@@ -20,12 +20,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.awt.*;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -59,8 +61,12 @@ public class MainPageController implements RequiresMainController, RequiresUser,
     @FXML
     private VBox eventContainer;
 
+    private Text eventDateMensage;
+
     public void initialize() {
         LanguageManager.registerListener(this);
+        eventDateMensage = new Text();
+        eventDateMensage.setText(LanguageManager.getString("events.date"));
     }
 
     @Override
@@ -108,6 +114,7 @@ public class MainPageController implements RequiresMainController, RequiresUser,
 
     private void loadEvents() {
         List<Evento> events = mainController.getAllEvents();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
         eventContainer.getChildren().clear();
 
@@ -122,7 +129,8 @@ public class MainPageController implements RequiresMainController, RequiresUser,
             Label descriptionLabel = new Label(e.getDescription());
             descriptionLabel.getStyleClass().add("event-description");
 
-            Label dataLabel = new Label(e.getDate().toString());
+            String formattedDate = formatter.format(e.getDate());
+            Label dataLabel = new Label(eventDateMensage.getText()+ ": " + formattedDate);
             dataLabel.getStyleClass().add("event-date");
 
             vbox.getChildren().addAll(tittleLabel, descriptionLabel, dataLabel);
@@ -146,12 +154,14 @@ public class MainPageController implements RequiresMainController, RequiresUser,
         changeLanguage.setText(LanguageManager.getString("menu.changeLanguage"));
         logoutButton.setText(LanguageManager.getString("menu.logout"));
         events.setText(LanguageManager.getString("events.title"));
+        eventDateMensage.setText(LanguageManager.getString("events.date"));
     }
 
     @Override
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
         updateUserData();
+        loadEvents();
     }
 
     public void handleEvent(MouseEvent mouseEvent, Evento e) throws IOException {

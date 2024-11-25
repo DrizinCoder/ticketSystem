@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -141,10 +142,12 @@ public class SingleEventController implements RequiresMainController, RequiresUs
     }
 
     private void updateEventData() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         mainController.calculateEventRating(event);
         eventTittle.setText(event.getName());
         eventDescription.setText(event.getDescription());
-        eventDate.setText(event.getDate().toString());
+        String formattedDate = formatter.format(event.getDate());
+        eventDate.setText(formattedDate);
         Rate.setText(event.getRate().toString());
         String statusText;
         if (LanguageManager.languageController == 0) {
