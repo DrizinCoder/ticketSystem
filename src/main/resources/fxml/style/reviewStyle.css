@@ -1,0 +1,40 @@
+.vbox-popup {
+    -fx-background-color: linear-gradient(to bottom, #1B1B1D, #2C3E50);
+    -fx-border-width: 2;
+    -fx-border-color: #2C3E50;
+}
+
+.popup-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ECF0F1;
+}
+
+.text-area-review {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 1px;
+    -fx-border-color: #BDC3C7;
+    -fx-text-fill: #000000;
+}
+
+.popup-submit-button {
+    -fx-background-color: #1ABC9C;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-pref-width: 150px;
+}
+
+.popup-submit-button:hover {
+    -fx-background-color: #16A085;
+}
+
+.popup-cancel-button {
+    -fx-background-color: #E74C3C;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-pref-width: 150px;
+}
+
+.popup-cancel-button:hover {
+    -fx-background-color: #C0392B;
+}

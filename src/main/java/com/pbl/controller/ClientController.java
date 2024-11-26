@@ -115,25 +115,6 @@ public class ClientController {
     }
 
     /**
-     * Adiciona uma review para um evento, após a sua conclusão.
-     *
-     * @param event o evento
-     * @param user o usuário que está adicionando a review
-     * @param comment o comentário da review
-     * @param rating a nota atribuída ao evento
-     * @return o objeto {@code Review} criado
-     * @throws SecurityException se o evento ainda estiver ativo
-     */
-    public Review reviewEvent(Evento event, Usuario user, String comment, int rating){
-        if(event != null && !event.isAtivo()){
-            return reviewService.makeReview(user, comment, rating, event.getID());
-        } else if (event != null && event.isAtivo()) {
-            throw new SecurityException("Comentário só pode ser adicionando após a realização do evento.");
-        }
-        return null;
-    }
-
-    /**
      * Exibe todas as reviews associadas a um evento específico.
      *
      * @param eventID o identificador de evento

@@ -22,8 +22,8 @@
             </VBox>
         </VBox>
         <VBox alignment="CENTER" spacing="20">
-            <Button fx:id="changeLanguage" styleClass="button-menu" onMouseClicked="#changeLanguage"/>
-            <Button fx:id="backButton" styleClass="button-menu" onMouseClicked="#hangleBackButton"/>
+            <Button fx:id="changeLanguage" styleClass="button-cancel" onMouseClicked="#changeLanguage"/>
+            <Button fx:id="backButton" styleClass="button-cancel" onMouseClicked="#hangleBackButton"/>
         </VBox>
     </VBox>
 

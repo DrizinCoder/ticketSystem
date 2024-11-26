@@ -1,6 +1,7 @@
 package com.pbl.viewController;
 
 import com.pbl.Interfaces.LanguageChange;
+import com.pbl.Interfaces.RequiresEvent;
 import com.pbl.Interfaces.RequiresMainController;
 import com.pbl.Interfaces.RequiresUser;
 import com.pbl.controller.mainController;
@@ -8,12 +9,17 @@ import com.pbl.models.Evento;
 import com.pbl.models.Ingresso;
 import com.pbl.models.Usuario;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
@@ -76,7 +82,7 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
             Button actionButton = new Button("Avaliar evento");
             actionButton.getStyleClass().add("button-cancel");
             actionButton.setOnAction(x -> {
-                handleReviewButton();
+                handleReviewButton(e);
             });
 
             // Colocar data e botão dentro de uma HBox
@@ -113,7 +119,32 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
         updateLanguage();
     }
 
-    public void handleReviewButton(){
+    public void handleReviewButton(Ingresso e){
+        try {
+            // Carregar o FXML do pop-up
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ReviewEventPopup.fxml"));
+            Parent root = loader.load();
+
+            //Injetando dependencias
+            Object viewController = loader.getController();
+            Evento evento = mainController.getEventByID(e.getEventoID());
+            ((RequiresEvent) viewController).setEvent(evento);
+            ((RequiresMainController) viewController).setDependencies(navigatorController.getController(),
+                    navigatorController);
+            ((RequiresUser) viewController).setUser(navigatorController.getUser());
+
+            // Criar um novo Stage para o pop-up
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL); // Bloqueia interação com a janela principal
+            popupStage.setTitle("Avaliar Evento");
+            popupStage.setScene(new Scene(root));
+            popupStage.setResizable(false);
+
+            // Exibir o pop-up
+            popupStage.showAndWait();
+        } catch (Exception erro) {
+            erro.printStackTrace();
+        }
 
     }
 

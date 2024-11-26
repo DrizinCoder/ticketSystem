@@ -59,7 +59,7 @@ public class CommentTestFacade {
     public String create(UUID userId, String eventId, int rating, String content) {
         Usuario user = controller.getUserByID(userId);
         Evento event = controller.getEventByID(UUID.fromString(eventId));
-        Review review = clientController.reviewEvent(event, user, content, rating);
+        Review review = controller.reviewEvent(event, user, content, rating);
         return review.getID().toString();
     }
 

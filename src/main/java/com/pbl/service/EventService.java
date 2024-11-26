@@ -103,13 +103,15 @@ public class EventService {
      */
     public double calculateRating(Evento event) {
         int brutalRating = 0;
+        List<Review> auxList = new ArrayList<>();
         for (Review review : reviewStore.get()) {
             if(review.getEventID().equals(event.getID())){
                 brutalRating += review.getRating();
+                auxList.add(review);
             }
         }
 
-        double rate = (double) brutalRating / reviewStore.get().size();
+        double rate = (double) brutalRating / auxList.size();
         event.setRate(rate);
         return rate;
     }

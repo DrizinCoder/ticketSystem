@@ -120,4 +120,12 @@ public class NavigatorController {
     public void popStack() throws IOException {
         sceneStack.pop();
     }
+
+    public Usuario getUser(){
+        return loggedUser;
+    }
+
+    public mainController getController() {
+        return controller;
+    }
 }
