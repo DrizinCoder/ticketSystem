@@ -59,17 +59,21 @@ public class ReviewPopUpController implements RequiresMainController, RequiresUs
 
     @FXML
     public void handleSubmitButton() {
-        String comment = reviewText.getText();
-        if(gradeSelector.getValue() != null) {
-            int grade = gradeSelector.getValue();
+        if(!event.isAtivo()) {
+            String comment = reviewText.getText();
+            if (gradeSelector.getValue() != null) {
+                int grade = gradeSelector.getValue();
 
-            if (verifyReview(comment)) {
-                mainController.reviewEvent(event, user, comment, grade);
-                showSucessAlert("Confirmação de operação", "Sua avaliação foi publicada no evento!");
-                closePopup();
+                if (verifyReview(comment)) {
+                    mainController.reviewEvent(event, user, comment, grade);
+                    showSucessAlert("Confirmação de operação", "Sua avaliação foi publicada no evento!");
+                    closePopup();
+                }
+            } else {
+                showErrorAlert("Operação inválida", "Por favor, selecione uma nota.");
             }
         } else{
-            showErrorAlert("Operação inválida", "Por favor, selecione uma nota");
+            showErrorAlert("Operação inválida", "O evento ainda não foi realizado!");
         }
     }
 

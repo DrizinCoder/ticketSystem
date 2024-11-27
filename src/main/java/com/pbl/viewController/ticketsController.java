@@ -41,8 +41,14 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
     @FXML
     private Button backButton;
 
+    private Button actionButton;
+
+    String seat;
+    String cost;
+
     public void initialize() {
         LanguageManager.registerListener(this);
+        actionButton = new Button();
     }
 
     @Override
@@ -73,13 +79,12 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
             tittleLabel.getStyleClass().add("event-title");
 
             Double preco = e.getPreco();
-            Label descriptionLabel = new Label(preco.toString());
+            Label descriptionLabel = new Label(cost + " " + preco);
             descriptionLabel.getStyleClass().add("event-description");
 
-            Label dataLabel = new Label(e.getAssento());
+            Label dataLabel = new Label(seat + " " + e.getAssento());
             dataLabel.getStyleClass().add("event-date");
 
-            Button actionButton = new Button("Avaliar evento");
             actionButton.getStyleClass().add("button-cancel");
             actionButton.setOnAction(x -> {
                 handleReviewButton(e);
@@ -87,7 +92,7 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
 
             // Colocar data e botão dentro de uma HBox
             HBox hbox = new HBox();
-            hbox.setSpacing(940); // Espaçamento horizontal
+            hbox.setSpacing(880); // Espaçamento horizontal
             hbox.getChildren().addAll(dataLabel, actionButton);
 
             vbox.getChildren().addAll(tittleLabel, descriptionLabel, hbox);
@@ -100,18 +105,21 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
         if(LanguageManager.languageController == 0){
             LanguageManager.setLocale(Locale.ENGLISH);
             LanguageManager.languageController = 1;
-            LanguageManager.notifyListeners();
         } else{
             LanguageManager.setLocale(Locale.forLanguageTag("pt-BR"));
             LanguageManager.languageController = 0;
-            LanguageManager.notifyListeners();
         }
+        LanguageManager.notifyListeners();
+        loadTickets();
     }
 
     public void updateLanguage() {
         tickets.setText(LanguageManager.getString("tickets.title"));
         changeLanguage.setText(LanguageManager.getString("menu.changeLanguage"));
         backButton.setText(LanguageManager.getString("button.cancel"));
+        actionButton.setText(LanguageManager.getString("button.action"));
+        seat = LanguageManager.getString("seat");
+        cost = LanguageManager.getString("cost");
     }
 
     @Override

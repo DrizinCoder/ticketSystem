@@ -67,7 +67,7 @@
 
 .button-cancel:pressed{
     -fx-background-color: rgba(133, 146, 158, 0.1);
-    -fx-cursor: normal  ;
+    -fx-cursor: normal;
     -fx-scale-x: 1.0;
     -fx-scale-y: 1.0;
 }

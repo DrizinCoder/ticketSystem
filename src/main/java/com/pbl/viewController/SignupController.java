@@ -3,13 +3,12 @@ package com.pbl.viewController;
 import com.pbl.Interfaces.LanguageChange;
 import com.pbl.Interfaces.RequiresMainController;
 import com.pbl.controller.mainController;
+import com.pbl.models.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -65,17 +64,43 @@ public class SignupController  implements RequiresMainController, LanguageChange
         LanguageManager.notifyListeners();
     }
 
-    public void handleCadastrarButton(ActionEvent actionEvent) {
+    public void handleCadastrarButton(ActionEvent actionEvent) throws IOException {
         String login = loginField.getText();
         String password = passwordField.getText();
         String username = usernameField.getText();
         String cpf = CpfField.getText();
         String email = emailField.getText();
 
+
         if(verifyCredintials(login,password,cpf, email, username)) {
-            mainController.signUp(login, password, username, cpf, email, false);
-            messageLabel.setText(LanguageManager.getString("signup.messageLabel"));
+            if(verifyLogin(login)) {
+                mainController.signUp(login, password, username, cpf, email, false);
+                showConfimationAlert("Operação confirmada", "Usuário cadastrado com sucesso!");
+                navigatorController.showMainPage();
+            } else {
+                showErrorAlert("Operação inválida", "Login já está em uso.");
+            }
         }
+    }
+
+    private void showErrorAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.initStyle(StageStyle.UNDECORATED);
+        alert.setContentText(message);
+
+        alert.showAndWait();
+    }
+
+    private void showConfimationAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.initStyle(StageStyle.UNDECORATED);
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 
     public void handleCancelButton(ActionEvent actionEvent) throws IOException {
@@ -100,6 +125,11 @@ public class SignupController  implements RequiresMainController, LanguageChange
             return false;
         }
         return true;
+    }
+
+    public boolean verifyLogin(String login){
+        Usuario user = mainController.getUserByLogin(login);
+        return user == null;
     }
 
     public void updateLanguage(){

@@ -35,9 +35,6 @@ public class LoginController implements RequiresMainController, LanguageChange {
     private Button loginButton;
 
     @FXML
-    private Button cancelButton;
-
-    @FXML
     private Label noAccountMessage;
 
     @FXML
@@ -65,8 +62,9 @@ public class LoginController implements RequiresMainController, LanguageChange {
         if (mainController.signIn(username, password)) {
             Usuario user = mainController.getUserByLogin(username);
             navigatorController.setLoggedUser(user);
-            System.out.println(user);
+            showConfimationAlert("Operação realizada com sucesso", "Login realizado com sucesso!");
             passwordField.clear();
+
             navigatorController.showMainPage();
         } else {
             showErrorAlert("Erro de login", "Nome de usuário ou senha inválidos.");
@@ -83,8 +81,14 @@ public class LoginController implements RequiresMainController, LanguageChange {
         alert.showAndWait();
     }
 
-    public void handleCancelButton(ActionEvent actionEvent) throws IOException {
-        navigatorController.comeback();
+    private void showConfimationAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.initStyle(StageStyle.UNDECORATED);
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 
     public void handleSignUpLink(MouseEvent mouseEvent) throws IOException {
@@ -95,7 +99,6 @@ public class LoginController implements RequiresMainController, LanguageChange {
         welcomeLabel.setText(LanguageManager.getString("title.welcome"));
         subtitleLabel.setText(LanguageManager.getString("subtitle.credentials"));
         loginButton.setText(LanguageManager.getString("button.login"));
-        cancelButton.setText(LanguageManager.getString("button.cancel"));
         noAccountMessage.setText(LanguageManager.getString("message.noAccount"));
         signUpLink.setText(LanguageManager.getString("link.signUp"));
         usernameField.setPromptText(LanguageManager.getString("field.username"));
@@ -107,16 +110,18 @@ public class LoginController implements RequiresMainController, LanguageChange {
         if(LanguageManager.languageController == 0){
             LanguageManager.setLocale(Locale.ENGLISH);
             LanguageManager.languageController = 1;
-            LanguageManager.notifyListeners();
         } else{
             LanguageManager.setLocale(Locale.forLanguageTag("pt-BR"));
             LanguageManager.languageController = 0;
-            LanguageManager.notifyListeners();
         }
+        LanguageManager.notifyListeners();
     }
 
     @Override
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
+    }
+
+    public void toggleFont(ActionEvent actionEvent) {
     }
 }

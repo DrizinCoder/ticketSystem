@@ -69,6 +69,7 @@
     -fx-background-color: rgba(133, 146, 158, 0.1);
     -fx-scale-x: 1.0;
     -fx-scale-y: 1.0;
+    -fx-cursor: normal;
 }
 
 .label-message {

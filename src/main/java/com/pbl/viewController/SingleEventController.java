@@ -32,6 +32,7 @@ public class SingleEventController implements RequiresMainController, RequiresUs
     private NavigatorController navigatorController;
     private Usuario user;
     private Evento event;
+    private String payslip;
 
     @FXML
     private Label eventTittle;
@@ -91,22 +92,38 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         String paymentMethod = paymentSelector.getValue();
         Card card = null;
 
-        if (!paymentMethod.equals("Boleto")) {
-            card = mainController.getCardByNumber(paymentMethod);
-        }
+        if(event.isAtivo()) {
+            if (!paymentMethod.equals("Boleto")) {
+                card = mainController.getCardByNumber(paymentMethod);
+                String seat = seatSelector.getValue();
 
-        String seat = seatSelector.getValue();
+                if (seat != null && verifyCredentials(paymentMethod, seat)) {
+                    mainController.buyTicket(user, event, card, seat);
+                    mainController.removeSeat(seat, event);
+                    // Atualiza a lista no ComboBox
+                    ObservableList<String> updatedSeats = FXCollections.observableArrayList(mainController.getEventSeats(event.getID()));
+                    seatSelector.setItems(updatedSeats);
 
-        if (seat != null && verifyCredentials(paymentMethod, seat)) {
-            mainController.buyTicket(user, event, card, seat);
-            mainController.removeSeat(seat, event);
-            // Atualiza a lista no ComboBox
-            ObservableList<String> updatedSeats = FXCollections.observableArrayList(mainController.getEventSeats(event.getID()));
-            seatSelector.setItems(updatedSeats);
+                    showConfirmationAlert("Ação Realizada com Sucesso", "Compra realizada com sucesso!");
+                } else {
+                    showConfirmationAlert("Erro", "Por favor, selecione um assento válido.");
+                }
+            } else {
+                String seat = seatSelector.getValue();
+                if (seat != null && verifyCredentials(paymentMethod, seat)) {
+                    mainController.buyTicket(user, event, null, seat);
+                    mainController.removeSeat(seat, event);
+                    // Atualiza a lista no ComboBox
+                    ObservableList<String> updatedSeats = FXCollections.observableArrayList(mainController.getEventSeats(event.getID()));
+                    seatSelector.setItems(updatedSeats);
 
-            showConfirmationAlert("Ação Realizada com Sucesso", "Compra realizada com sucesso!");
-        } else {
-            showConfirmationAlert("Erro", "Por favor, selecione um assento válido.");
+                    showConfirmationAlert("Ação Realizada com Sucesso", "Compra realizada com sucesso!");
+                } else {
+                    showConfirmationAlert("Erro", "Por favor, selecione um assento válido.");
+                }
+            }
+        } else{
+            showErrorAlert("Operação inválida", "O evento ja foi realizado.");
         }
     }
 
@@ -163,6 +180,7 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         cancelButton.setText(LanguageManager.getString("button.cancel"));
         purchaseButton.setText(LanguageManager.getString("event.purchaseButton"));
         languageToggle.setText(LanguageManager.getString("button.language"));
+        payslip = LanguageManager.getString("payslip");
     }
 
     public void changeLanguage(MouseEvent mouseEvent) {
@@ -175,6 +193,7 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         }
         LanguageManager.notifyListeners();
         updateEventData();
+        loadPaymentSelector();
     }
 
     @Override
@@ -209,13 +228,13 @@ public class SingleEventController implements RequiresMainController, RequiresUs
     }
 
     public void loadPaymentSelector() {
-        ObservableList<String> paymentOptions = FXCollections.observableArrayList("Boleto");
+        ObservableList<String> paymentOptions = FXCollections.observableArrayList(payslip);
         List<Card> userCards = mainController.getUserCards(user.getID());
         for(Card card : userCards) {
             paymentOptions.add(card.getCardNumber());
         }
         paymentSelector.setItems(paymentOptions);
-        paymentSelector.setValue("Boleto");
+        paymentSelector.setValue(payslip);
     }
 
     public void loadSeatSelector() {

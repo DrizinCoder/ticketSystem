@@ -82,7 +82,10 @@ public class PerfilController implements RequiresMainController, RequiresUser, L
         String email = emailField.getText();
         if(verifyCredintials(login,password, email, username)) {
             mainController.editPerfil(user, username, email, password, login);
+            Usuario userUpdated = mainController.getUserByID(user.getID());
             messageLabel.setText(LanguageManager.getString("perfil.messageLabel"));
+            navigatorController.setLoggedUser(userUpdated);
+            LanguageManager.notifyListeners();
         }
     }
 
@@ -91,6 +94,14 @@ public class PerfilController implements RequiresMainController, RequiresUser, L
     }
 
     public void changeLanguage(MouseEvent mouseEvent) {
+        if(LanguageManager.languageController == 0){
+            LanguageManager.setLocale(Locale.ENGLISH);
+            LanguageManager.languageController = 1;
+        } else{
+            LanguageManager.setLocale(Locale.forLanguageTag("pt-BR"));
+            LanguageManager.languageController = 0;
+        }
+        LanguageManager.notifyListeners();
     }
 
     public void updateUserData(){

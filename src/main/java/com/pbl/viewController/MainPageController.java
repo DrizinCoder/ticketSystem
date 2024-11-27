@@ -162,6 +162,8 @@ public class MainPageController implements RequiresMainController, RequiresUser,
         updateLanguage();
         updateUserData();
         loadEvents();
+        setUser(navigatorController.getUser());
+        updateUserData();
     }
 
     public void handleEvent(MouseEvent mouseEvent, Evento e) throws IOException {
