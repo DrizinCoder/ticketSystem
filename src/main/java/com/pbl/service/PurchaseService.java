@@ -167,4 +167,15 @@ public class PurchaseService {
     public Purchase getPurchaseById(UUID purchaseId) {
         return purchaseStore.getByID(purchaseId);
     }
+
+    public List<Purchase> getPurchaseByUserID(UUID userId){
+        List<Purchase> purchases = purchaseStore.get();
+        List<Purchase> userPurchases = new ArrayList<>();
+        for (Purchase purchase : purchases) {
+            if (purchase.getUser().equals(userId)) {
+                userPurchases.add(purchase);
+            }
+        }
+        return userPurchases;
+    }
 }

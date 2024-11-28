@@ -59,6 +59,9 @@ public class MainPageController implements RequiresMainController, RequiresUser,
     private Button logoutButton;
 
     @FXML
+    private Button mailbox;
+
+    @FXML
     private VBox eventContainer;
 
     private Text eventDateMensage;
@@ -155,6 +158,7 @@ public class MainPageController implements RequiresMainController, RequiresUser,
         logoutButton.setText(LanguageManager.getString("menu.logout"));
         events.setText(LanguageManager.getString("events.title"));
         eventDateMensage.setText(LanguageManager.getString("events.date"));
+        mailbox.setText(LanguageManager.getString("menu.mailbox"));
     }
 
     @Override
@@ -181,5 +185,9 @@ public class MainPageController implements RequiresMainController, RequiresUser,
 
     public void handleTickets(MouseEvent mouseEvent) throws IOException {
         navigatorController.showTickets();
+    }
+
+    public void handleMailBox(MouseEvent mouseEvent) throws IOException {
+        navigatorController.showMailBox();
     }
 }

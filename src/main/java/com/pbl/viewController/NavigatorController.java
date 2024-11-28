@@ -128,4 +128,8 @@ public class NavigatorController {
     public mainController getController() {
         return controller;
     }
+
+    public void showMailBox() throws IOException {
+        loadScene("/fxml/mailBox-view.fxml");
+    }
 }

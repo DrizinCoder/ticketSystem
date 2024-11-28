@@ -25,27 +25,31 @@
 
     <!-- Menu de Navegação -->
     <VBox alignment="CENTER" spacing="20" styleClass="menu-container">
-        <Region prefHeight="50"/>
+        <Region prefHeight="20"/>
         <Label fx:id="username" styleClass="label-message" wrapText="true"/>
-        <Region prefHeight="30"/>
+        <Region prefHeight="20"/>
         <Button fx:id="profile" styleClass="button-menu" onMouseClicked="#handleProfile"/>
         <Region prefHeight="15"/>
         <Button fx:id="editButton" styleClass="button-menu" onMouseClicked="#handleCard"/>
         <Region prefHeight="15"/>
         <Button fx:id="seePurchasesButton" styleClass="button-menu" onMouseClicked="#handleTickets"/>
         <Region prefHeight="15"/>
+        <Button fx:id="mailbox" styleClass="button-menu" onMouseClicked="#handleMailBox"/>
+        <Region prefHeight="15"/>
         <Button fx:id="changeLanguage" styleClass="button-menu" onMouseClicked="#changeLanguage"/>
         <Region prefHeight="15"/>
         <Button fx:id="logoutButton" styleClass="button-menu" onAction="#handleLogout"/>
-        <Region prefHeight="50"/>
+        <Region prefHeight="20"/>
     </VBox>
 
     <!-- Área de Exibição de Eventos -->
     <VBox GridPane.columnIndex="1" alignment="TOP_CENTER" spacing="20" styleClass="event-container">
         <Label fx:id="events" styleClass="labelEvent-message"/>
 
-        <VBox fx:id="eventContainer" alignment="TOP_CENTER" spacing="15" prefWidth="350">
-        </VBox>
+        <ScrollPane fx:id="eventScrollPane" fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-pane-custom">
+            <VBox fx:id="eventContainer" alignment="TOP_CENTER" spacing="15" prefWidth="350">
+            </VBox>
+        </ScrollPane>
     </VBox>
 
 </GridPane>

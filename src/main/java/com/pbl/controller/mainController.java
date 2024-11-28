@@ -401,4 +401,8 @@
             }
             return null;
         }
+
+        public List<Purchase> getUserPurchases(UUID user){
+            return purchaseService.getPurchaseByUserID(user);
+        }
     }

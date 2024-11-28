@@ -41,14 +41,11 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
     @FXML
     private Button backButton;
 
-    private Button actionButton;
-
     String seat;
     String cost;
 
     public void initialize() {
         LanguageManager.registerListener(this);
-        actionButton = new Button();
     }
 
     @Override
@@ -85,6 +82,8 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
             Label dataLabel = new Label(seat + " " + e.getAssento());
             dataLabel.getStyleClass().add("event-date");
 
+            Button actionButton = new Button();
+            actionButton.setText(LanguageManager.getString("button.action"));
             actionButton.getStyleClass().add("button-cancel");
             actionButton.setOnAction(x -> {
                 handleReviewButton(e);
@@ -117,7 +116,6 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
         tickets.setText(LanguageManager.getString("tickets.title"));
         changeLanguage.setText(LanguageManager.getString("menu.changeLanguage"));
         backButton.setText(LanguageManager.getString("button.cancel"));
-        actionButton.setText(LanguageManager.getString("button.action"));
         seat = LanguageManager.getString("seat");
         cost = LanguageManager.getString("cost");
     }

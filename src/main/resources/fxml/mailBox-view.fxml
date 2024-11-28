@@ -6,22 +6,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import org.controlsfx.control.SearchableComboBox?>
 <StackPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.pbl.viewController.ticketsController"
-            stylesheets="@style/ticketStyle.css"
-            prefHeight="400.0" prefWidth="600.0"
-            styleClass="menu-container">
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.pbl.viewController.MailBoxController"
+           stylesheets="@style/ticketStyle.css"
+           prefHeight="400.0" prefWidth="600.0"
+           styleClass="menu-container">
 
     <VBox alignment="CENTER" spacing="40" styleClass="event-container">
         <Region prefHeight="30"/>
         <VBox alignment="TOP_CENTER" spacing="20" styleClass="event-container">
-            <Label fx:id="tickets" styleClass="labelEvent-message"/>
+            <Label fx:id="mails" styleClass="labelEvent-message"/>
 
-            <ScrollPane fx:id="ticketScrollPane" fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-pane-custom">
-                <VBox fx:id="ticketsContainer" alignment="TOP_CENTER" spacing="15" prefWidth="350">
-                </VBox>
-            </ScrollPane>
+        <ScrollPane fx:id="mailsScrollPane" fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-pane-custom">
+            <VBox fx:id="mailsContainer" alignment="TOP_CENTER" spacing="15" prefWidth="350">
+            </VBox>
+        </ScrollPane>
 
         </VBox>
         <VBox alignment="CENTER" spacing="20">

@@ -94,3 +94,33 @@
         -fx-font-size: 18px;
         -fx-fill: #F4F6F7; /* Cor do ícone */
     }
+
+    .scroll-pane-custom {
+        -fx-background-color: rgba(244, 246, 247, 0.03);
+        -fx-margin-right: 10px; /* Adiciona espaço à direita */
+        -fx-border-color: transparent;
+        -fx-border-radius: 2;
+        -fx-border-width: 1px; /* Largura da borda */
+        -fx-padding: 10px; /* Padding interno */
+    }
+
+    .scroll-pane-custom .viewport {
+        -fx-background-color: transparent; /* Fundo interno do conteúdo */
+        -fx-padding: 10px; /* Padding do conteúdo */
+    }
+
+    .scroll-pane .scroll-bar {
+        -fx-padding: 5px; /* Padding da barra de rolagem */
+        -fx-background-color: transparent; /* Fundo da barra */
+    }
+
+    .scroll-pane .track {
+        -fx-background-color: rgba(224, 224, 224, 0.1); /* Fundo do trilho */
+    }
+
+
+    .scroll-pane .thumb {
+        -fx-background-color: rgba(255, 255, 255, 0.25); /* Cor do "polegar" (a parte que desliza) */
+        -fx-background-radius: 5px; /* Arredondar os cantos */
+        -fx-padding: 2px;
+    }
