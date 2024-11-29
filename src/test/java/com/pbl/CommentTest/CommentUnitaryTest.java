@@ -27,8 +27,9 @@ public class CommentUnitaryTest {
         String comment = "Ótimo evento!";
         int rating = 5;
         eventID = UUID.randomUUID();
+        UUID userId = UUID.randomUUID();
 
-        review = new Review(userName, comment, rating, eventID);
+        review = new Review(userId, comment, rating, eventID);
     }
 
     @Test
@@ -43,7 +44,8 @@ public class CommentUnitaryTest {
 
     @Test
     public void testSetUserName() {
-        review.setUser("Maria");
+        UUID otherUserID = UUID.randomUUID();
+        review.setUser(otherUserID);
         assertEquals("Maria", review.getUser());
     }
 
