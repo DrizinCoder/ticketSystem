@@ -201,6 +201,11 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         updateLanguage();
     }
 
+    @Override
+    public void toggleFont() {
+
+    }
+
     public void loadReviews() {
         List<Review> reviews = mainController.getEventsReview(event.getID());
 
@@ -211,7 +216,8 @@ public class SingleEventController implements RequiresMainController, RequiresUs
             vbox.setSpacing(10);
             vbox.getStyleClass().add("event-box");
 
-            Label tittleLabel = new Label(r.getUser());
+            String userLogin = mainController.getUserByID(r.getUser()).getLogin();
+            Label tittleLabel = new Label(userLogin);
             tittleLabel.getStyleClass().add("event-title");
 
             Label descriptionLabel = new Label(r.getComment());

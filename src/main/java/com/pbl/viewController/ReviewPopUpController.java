@@ -132,4 +132,9 @@ public class ReviewPopUpController implements RequiresMainController, RequiresUs
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
     }
+
+    @Override
+    public void toggleFont() {
+
+    }
 }

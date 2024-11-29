@@ -20,7 +20,7 @@ import java.util.UUID;
  * @author Guilherme Fernandes Sardinha
  */
 public class Review {
-    protected String userName;
+    protected UUID userID;
     protected String comment;
     protected int rating;
     protected UUID eventID;
@@ -29,13 +29,13 @@ public class Review {
     /**
      * Construtor que inicializa uma nova avaliação.
      *
-     * @param userName o nome do usuário que realizou a avaliação
+     * @param userID o nome do usuário que realizou a avaliação
      * @param comment  o comentário feito sobre o evento
      * @param rating   a classificação do evento, sendo um valor inteiro
      * @param eventID  o identificador único do evento avaliado
      */
-    public Review(String userName, String comment, int rating, UUID eventID) {
-        this.userName = userName;
+    public Review(UUID userID, String comment, int rating, UUID eventID) {
+        this.userID = userID;
         this.comment = comment;
         this.rating = rating;
         this.eventID = eventID;
@@ -47,17 +47,17 @@ public class Review {
      *
      * @return o nome do usuário
      */
-    public String getUser() {
-        return userName;
+    public UUID getUser() {
+        return userID;
     }
 
     /**
      * Define o nome do usuário que fez a avaliação.
      *
-     * @param userName o novo nome do usuário
+     * @param userID o novo nome do usuário
      */
-    public void setUser(String userName) {
-        this.userName = userName;
+    public void setUser(UUID userID) {
+        this.userID = userID;
     }
 
     /**

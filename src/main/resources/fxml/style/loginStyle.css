@@ -166,3 +166,70 @@
 .event-container{
         -fx-padding: 0 10px 0 0; /* Adiciona 10px de espaço à direita */
 }
+
+.TittleFont{
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F4F6F7;
+}
+
+.subtitleFont{
+    -fx-font-size: 18px;
+    -fx-font-style: italic;
+    -fx-text-fill: #F4F6F7;
+}
+
+.buttonFontLogin{
+    -fx-background-color: rgb(22, 160, 133);
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-pref-width: 80%;
+}
+
+.buttonFontLogin:hover{
+    -fx-background-color: #1ABC9C;
+    -fx-cursor: hand;
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
+}
+
+.buttonFontLogin:pressed{
+    -fx-background-color: #148F77;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}
+
+.buttonFontCancel {
+    -fx-background-color: rgba(189, 195, 199, 0.02);
+    -fx-border-color: rgba(200, 200, 200, 0.4);
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-pref-width: 80%;
+}
+
+.buttonFontCancel:hover{
+    -fx-background-color: rgba(166, 172, 175, 0.10);
+    -fx-cursor: hand;
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
+}
+
+.buttonFontCancel:pressed{
+    -fx-background-color: rgba(133, 146, 158, 0.1);
+    -fx-cursor: normal;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}
+
+.label-link2 {
+    -fx-text-fill: #7272ea;
+    -fx-font-style: italic;
+    -fx-font-size: 15px;
+}
+.label-message2 {
+    -fx-text-fill: #F4F6F7;
+    -fx-font-style: italic;
+    -fx-font-size: 15px;
+}

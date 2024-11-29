@@ -161,4 +161,9 @@ public class SignupController  implements RequiresMainController, LanguageChange
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
     }
+
+    @Override
+    public void toggleFont() {
+
+    }
 }

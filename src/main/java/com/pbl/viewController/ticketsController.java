@@ -125,6 +125,11 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
         updateLanguage();
     }
 
+    @Override
+    public void toggleFont() {
+
+    }
+
     public void handleReviewButton(Ingresso e){
         try {
             // Carregar o FXML do pop-up

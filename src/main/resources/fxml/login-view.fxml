@@ -40,13 +40,10 @@
         <Button fx:id="loginButton" onAction="#handleLoginButton" styleClass="button-login"
                 maxWidth="Infinity" />
 
-        <Button text="Ajustar Fonte" onAction="#toggleFont" styleClass="button-cancel" maxWidth="Infinity"/>
+        <Button fx:id="FontButton" onAction="#toggleFont" styleClass="button-cancel" maxWidth="Infinity"/>
 
         <Button fx:id="languageToggle" styleClass="button-cancel" onMouseClicked="#changeLanguage"
                 maxWidth="Infinity"/>
-
-        <!-- Região de espaçamento -->
-        <Region prefHeight="1"/>
 
         <HBox alignment="CENTER" spacing="4">
             <Label fx:id="noAccountMessage" styleClass="label-message"/>

@@ -103,7 +103,7 @@ public class CommentTestFacade {
      */
     public UUID getUserIdById(String commentId) {
         Review review = controller.getReviewById(UUID.fromString(commentId));
-        Usuario user = controller.getUserByLogin(review.getUser());
+        Usuario user = controller.getUserByID(review.getUser());
         return user.getID();
     }
 

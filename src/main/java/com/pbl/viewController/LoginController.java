@@ -43,6 +43,9 @@ public class LoginController implements RequiresMainController, LanguageChange {
     @FXML
     private Button languageToggle;
 
+    @FXML
+    private Button FontButton;
+
     public void initialize(){
         LanguageManager.registerListener(this);
     }
@@ -104,6 +107,7 @@ public class LoginController implements RequiresMainController, LanguageChange {
         usernameField.setPromptText(LanguageManager.getString("field.username"));
         passwordField.setPromptText(LanguageManager.getString("field.password"));
         languageToggle.setText(LanguageManager.getString("button.language"));
+        FontButton.setText(LanguageManager.getString("button.font"));
     }
 
     public void changeLanguage(MouseEvent mouseEvent) {
@@ -122,6 +126,29 @@ public class LoginController implements RequiresMainController, LanguageChange {
         updateLanguage();
     }
 
-    public void toggleFont(ActionEvent actionEvent) {
+    /*
+    * Toda classe de LanguageManager deve implementar ToggleFont para alterar o tamanho das paradas.
+    * */
+
+    public void toggleFont() {
+        if(!LanguageManager.FontSizeController){
+            welcomeLabel.getStyleClass().add("TittleFont");
+            subtitleLabel.getStyleClass().add("subtitleFont");
+            loginButton.getStyleClass().add("buttonFontLogin");
+            languageToggle.getStyleClass().add("buttonFontCancel");
+            FontButton.getStyleClass().add("buttonFontCancel");
+            noAccountMessage.getStyleClass().add("label-message2");
+            signUpLink.getStyleClass().add("label-link2");
+        } else{
+            welcomeLabel.getStyleClass().remove("TittleFont");
+            subtitleLabel.getStyleClass().remove("subtitleFont");
+            loginButton.getStyleClass().remove("buttonFontLogin");
+            languageToggle.getStyleClass().remove("buttonFontCancel");
+            FontButton.getStyleClass().remove("buttonFontCancel");
+            noAccountMessage.getStyleClass().remove("label-message2");
+            signUpLink.getStyleClass().remove("label-link2");
+        }
+        LanguageManager.FontSizeController = !LanguageManager.FontSizeController;
+        LanguageManager.notifyListeners();
     }
 }

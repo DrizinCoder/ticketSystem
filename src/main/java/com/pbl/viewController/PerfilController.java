@@ -146,4 +146,9 @@ public class PerfilController implements RequiresMainController, RequiresUser, L
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
     }
+
+    @Override
+    public void toggleFont() {
+
+    }
 }

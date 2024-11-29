@@ -65,6 +65,11 @@ public class MailBoxController implements RequiresMainController, RequiresUser, 
         updateLanguage();
     }
 
+    @Override
+    public void toggleFont() {
+
+    }
+
     private void updateLanguage() {
         mails.setText(LanguageManager.getString("menu.mailbox"));
         changeLanguage.setText(LanguageManager.getString("menu.changeLanguage"));

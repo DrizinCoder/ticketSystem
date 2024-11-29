@@ -43,7 +43,7 @@ public class ReviewService {
      * @return a avaliação criada
      */
     public Review makeReview(Usuario user, String comment, int rating, UUID eventID) {
-        Review review = new Review(user.getLogin(), comment, rating, eventID);
+        Review review = new Review(user.getID(), comment, rating, eventID);
         reviewStore.add(review);
         return review;
     }

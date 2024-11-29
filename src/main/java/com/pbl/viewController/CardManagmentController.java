@@ -229,4 +229,9 @@ public class CardManagmentController implements RequiresMainController, Requires
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
     }
+
+    @Override
+    public void toggleFont() {
+
+    }
 }

@@ -12,6 +12,7 @@ public class LanguageManager {
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle("fxml.properties.language", currentLocale);
     private static final List<LanguageChange> listeners = new ArrayList<>();
     public static int languageController = 0;
+    public static boolean FontSizeController = false;
 
     public static void setLocale(Locale locale) {
         currentLocale = locale;

@@ -170,6 +170,11 @@ public class MainPageController implements RequiresMainController, RequiresUser,
         updateUserData();
     }
 
+    @Override
+    public void toggleFont() {
+
+    }
+
     public void handleEvent(MouseEvent mouseEvent, Evento e) throws IOException {
         navigatorController.setEventOn(e); // Injeta o evento no NavigatorController
         navigatorController.showEvent();
