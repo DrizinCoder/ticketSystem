@@ -201,7 +201,6 @@ public class SingleEventController implements RequiresMainController, RequiresUs
 
     @Override
     public void toggleFont() {
-
     }
 
     public void loadReviews() {
