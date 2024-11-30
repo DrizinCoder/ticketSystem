@@ -41,8 +41,8 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
     @FXML
     private Button backButton;
 
-    String seat;
-    String cost;
+    private String seat;
+    private String cost;
 
     public void initialize() {
         LanguageManager.registerListener(this);
@@ -91,7 +91,7 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
 
             // Colocar data e botão dentro de uma HBox
             HBox hbox = new HBox();
-            hbox.setSpacing(880); // Espaçamento horizontal
+            hbox.setSpacing(20); // Espaçamento horizontal
             hbox.getChildren().addAll(dataLabel, actionButton);
 
             vbox.getChildren().addAll(tittleLabel, descriptionLabel, hbox);
@@ -132,11 +132,9 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
 
     public void handleReviewButton(Ingresso e){
         try {
-            // Carregar o FXML do pop-up
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ReviewEventPopup.fxml"));
             Parent root = loader.load();
 
-            //Injetando dependencias
             Object viewController = loader.getController();
             Evento evento = mainController.getEventByID(e.getEventoID());
             ((RequiresEvent) viewController).setEvent(evento);
@@ -144,14 +142,12 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
                     navigatorController);
             ((RequiresUser) viewController).setUser(navigatorController.getUser());
 
-            // Criar um novo Stage para o pop-up
             Stage popupStage = new Stage();
-            popupStage.initModality(Modality.APPLICATION_MODAL); // Bloqueia interação com a janela principal
+            popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setTitle("Avaliar Evento");
             popupStage.setScene(new Scene(root));
             popupStage.setResizable(false);
 
-            // Exibir o pop-up
             popupStage.showAndWait();
         } catch (Exception erro) {
             erro.printStackTrace();

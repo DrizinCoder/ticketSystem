@@ -104,9 +104,9 @@ public class SingleEventController implements RequiresMainController, RequiresUs
                     ObservableList<String> updatedSeats = FXCollections.observableArrayList(mainController.getEventSeats(event.getID()));
                     seatSelector.setItems(updatedSeats);
 
-                    showConfirmationAlert("Ação Realizada com Sucesso", "Compra realizada com sucesso!");
+                    showConfirmationAlert(LanguageManager.getString("event.purchasePass"));
                 } else {
-                    showConfirmationAlert("Erro", "Por favor, selecione um assento válido.");
+                    showConfirmationAlert(LanguageManager.getString("event.seat"));
                 }
             } else {
                 String seat = seatSelector.getValue();
@@ -117,30 +117,29 @@ public class SingleEventController implements RequiresMainController, RequiresUs
                     ObservableList<String> updatedSeats = FXCollections.observableArrayList(mainController.getEventSeats(event.getID()));
                     seatSelector.setItems(updatedSeats);
 
-                    showConfirmationAlert("Ação Realizada com Sucesso", "Compra realizada com sucesso!");
+                    showConfirmationAlert(LanguageManager.getString("event.purchasePass"));
                 } else {
-                    showConfirmationAlert("Erro", "Por favor, selecione um assento válido.");
+                    showConfirmationAlert(LanguageManager.getString("event.seat"));
                 }
             }
         } else{
-            showErrorAlert("Operação inválida", "O evento ja foi realizado.");
+            showErrorAlert(LanguageManager.getString("event.finished"));
         }
     }
 
     public boolean verifyCredentials(String paymentMethod, String seat){
         if(Objects.equals(paymentMethod, "")){
-           showErrorAlert("Missing paymentoMethod", "Please enter a payment method.");
+           showErrorAlert(LanguageManager.getString("event.payment"));
             return false;
         } else if(Objects.equals(seat, "")){
-            showErrorAlert("Missing seat", "Please enter a seat.");
+            showErrorAlert(LanguageManager.getString("event.seat"));
             return false;
         }
         return true;
     }
 
-    private void showErrorAlert(String title, String message) {
+    private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UNDECORATED);
         alert.setContentText(message);
@@ -148,9 +147,8 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         alert.showAndWait();
     }
 
-    private void showConfirmationAlert(String title, String message) {
+    private void showConfirmationAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UNDECORATED);
         alert.setContentText(message);

@@ -58,6 +58,9 @@ public class PerfilController implements RequiresMainController, RequiresUser, L
 
     private Usuario user;
 
+    private String wrongInfo;
+    private String editPass;
+
     public void initialize(){
         LanguageManager.registerListener(this);
     }
@@ -127,16 +130,16 @@ public class PerfilController implements RequiresMainController, RequiresUser, L
 
     public boolean verifyCredintials(String login, String password, String email, String username) {
         if(Objects.equals(login, "")){
-            messageLabel.setText("login inválido");
+            messageLabel.setText(LanguageManager.getString("perfil.messageLabelErro"));
             return false;
         } else if(Objects.equals(password, "")){
-            messageLabel.setText("senha inválida");
+            messageLabel.setText(LanguageManager.getString("perfil.messageLabelErro"));
             return false;
         } else if(Objects.equals(username, "")){
-            messageLabel.setText("nome de usuário inválido");
+            messageLabel.setText(LanguageManager.getString("perfil.messageLabelErro"));
             return false;
         } else if(Objects.equals(email, "")){
-            messageLabel.setText("email inválido");
+            messageLabel.setText(LanguageManager.getString("perfil.messageLabelErro"));
             return false;
         }
         return true;

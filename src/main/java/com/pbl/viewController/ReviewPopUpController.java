@@ -30,6 +30,11 @@ public class ReviewPopUpController implements RequiresMainController, RequiresUs
     @FXML
     private TextArea reviewText;
 
+    private String writeText;
+    private String reviewSend;
+    private String gradeErro;
+    private String eventErro;
+
     private mainController mainController;
     private NavigatorController navigatorController;
     private Usuario user;
@@ -66,14 +71,14 @@ public class ReviewPopUpController implements RequiresMainController, RequiresUs
 
                 if (verifyReview(comment)) {
                     mainController.reviewEvent(event, user, comment, grade);
-                    showSucessAlert("Confirmação de operação", "Sua avaliação foi publicada no evento!");
+                    showSucessAlert(reviewSend);
                     closePopup();
                 }
             } else {
-                showErrorAlert("Operação inválida", "Por favor, selecione uma nota.");
+                showErrorAlert(gradeErro);
             }
         } else{
-            showErrorAlert("Operação inválida", "O evento ainda não foi realizado!");
+            showErrorAlert(eventErro);
         }
     }
 
@@ -84,15 +89,14 @@ public class ReviewPopUpController implements RequiresMainController, RequiresUs
 
     private boolean verifyReview(String comment){
         if(comment == null || comment.isEmpty()){
-            showErrorAlert("Operação inválida", "Preencha o campo de comentário!");
+            showErrorAlert(writeText);
             return false;
         }
         return true;
     }
 
-    private void showErrorAlert(String title, String message) {
+    private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UNDECORATED);
         alert.setContentText(message);
@@ -100,9 +104,8 @@ public class ReviewPopUpController implements RequiresMainController, RequiresUs
         alert.showAndWait();
     }
 
-    private void showSucessAlert(String title, String message) {
+    private void showSucessAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UNDECORATED);
         alert.setContentText(message);
@@ -126,6 +129,10 @@ public class ReviewPopUpController implements RequiresMainController, RequiresUs
         reviewTitle.setText(LanguageManager.getString("reviewTitle"));
         reviewText.setPromptText(LanguageManager.getString("reviewText"));
         gradeSelector.setPromptText(LanguageManager.getString("gradeOptions"));
+        writeText = LanguageManager.getString("writeText");
+        reviewSend = LanguageManager.getString("reviewSend");
+        gradeErro = LanguageManager.getString("gradeErro");
+        eventErro = LanguageManager.getString("eventErro");
     }
 
     @Override

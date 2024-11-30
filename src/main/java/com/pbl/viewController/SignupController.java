@@ -32,9 +32,6 @@ public class SignupController  implements RequiresMainController, LanguageChange
     private TextField emailField;
 
     @FXML
-    private Label messageLabel;
-
-    @FXML
     private Label titleLabel;
 
     @FXML
@@ -52,6 +49,9 @@ public class SignupController  implements RequiresMainController, LanguageChange
     private mainController mainController;
 
     private NavigatorController navigatorController;
+
+    private String signUpErro;
+    private String signUpPass;
 
     public void initialize(){
         LanguageManager.registerListener(this);
@@ -75,17 +75,16 @@ public class SignupController  implements RequiresMainController, LanguageChange
         if(verifyCredintials(login,password,cpf, email, username)) {
             if(verifyLogin(login)) {
                 mainController.signUp(login, password, username, cpf, email, false);
-                showConfimationAlert("Operação confirmada", "Usuário cadastrado com sucesso!");
+                showConfimationAlert(signUpPass);
                 navigatorController.showMainPage();
             } else {
-                showErrorAlert("Operação inválida", "Login já está em uso.");
+                showErrorAlert(signUpErro);
             }
         }
     }
 
-    private void showErrorAlert(String title, String message) {
+    private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UNDECORATED);
         alert.setContentText(message);
@@ -93,9 +92,8 @@ public class SignupController  implements RequiresMainController, LanguageChange
         alert.showAndWait();
     }
 
-    private void showConfimationAlert(String title, String message) {
+    private void showConfimationAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UNDECORATED);
         alert.setContentText(message);
@@ -109,19 +107,19 @@ public class SignupController  implements RequiresMainController, LanguageChange
 
     public boolean verifyCredintials(String login, String password, String cpf, String email, String username) {
         if(Objects.equals(login, "")){
-            messageLabel.setText("login inválido");
+            showErrorAlert(signUpErro);
             return false;
         } else if(Objects.equals(password, "")){
-            messageLabel.setText("senha inválida");
+            showErrorAlert(signUpErro);
             return false;
         } else if(Objects.equals(username, "")){
-            messageLabel.setText("nome de usuário inválido");
+            showErrorAlert(signUpErro);
             return false;
         } else if(Objects.equals(cpf, "")){
-            messageLabel.setText("cpf inválido");
+            showErrorAlert(signUpErro);
             return false;
         } else if(Objects.equals(email, "")){
-            messageLabel.setText("email inválido");
+            showErrorAlert(signUpErro);
             return false;
         }
         return true;
@@ -143,6 +141,8 @@ public class SignupController  implements RequiresMainController, LanguageChange
         confirmButton.setText(LanguageManager.getString("signup.registerButton"));
         backButton.setText(LanguageManager.getString("signup.backButton"));
         languageToggle.setText(LanguageManager.getString("button.language"));
+        signUpErro = LanguageManager.getString("signUp.erro");
+        signUpPass = LanguageManager.getString("signUp.pass");
     }
 
     public void changeLanguage(MouseEvent mouseEvent) {

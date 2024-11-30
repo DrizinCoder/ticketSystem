@@ -93,7 +93,7 @@ public class CardManagmentController implements RequiresMainController, Requires
             int cvv = Integer.parseInt(cvvField.getText());
             if(verifyCredentials(holderName, cardNumber, expiryDate.toString())) {
                 mainController.addCreditCard(holderName, cardNumber, expiryDate, cvv, user.getID());
-                showConfirmationAlert("Sucess!", "Operation finish sucessfully!");
+                showConfirmationAlert(LanguageManager.getString("cardSucess"));
                 loadCard();
             }
         }
@@ -101,24 +101,23 @@ public class CardManagmentController implements RequiresMainController, Requires
 
     public boolean verifyCvv() {
         try {
-            // Obtém o texto do campo (cvvField) e converte para int
                 Integer.parseInt(cvvField.getText());
                 return true;
         } catch (NumberFormatException e) {
-                showErrorAlert("DONT ACEPTED ACTION", "INSERT OTHER VALUE");
+                showErrorAlert(LanguageManager.getString("cardErro"));
                 return false;
         }
     }
 
     public boolean verifyCredentials(String holderName, String cardNumber, String expiryDate) {
         if(Objects.equals(holderName, "")){
-            showErrorAlert("Campo em branco", "nome do titular em branco");
+            showErrorAlert(LanguageManager.getString("cardErro"));
             return false;
         } else if(Objects.equals(cardNumber, "")){
-            showErrorAlert("Campo em branco", "numero do cartão em branco");
+            showErrorAlert(LanguageManager.getString("cardErro"));
             return false;
         } else if(Objects.equals(expiryDate, "")){
-            showErrorAlert("Campo em branco", "data em branco");
+            showErrorAlert(LanguageManager.getString("cardErro"));
             return false;
         }
         return true;
@@ -137,14 +136,13 @@ public class CardManagmentController implements RequiresMainController, Requires
         if(localDate != null) {
             return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         } else{
-            showErrorAlert("invalid date", "enter a valid date!");
+            showErrorAlert(LanguageManager.getString("cardErro"));
             return null;
         }
     }
 
-    private void showErrorAlert(String title, String message) {
+    private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UNDECORATED);
         alert.setContentText(message);
@@ -152,9 +150,8 @@ public class CardManagmentController implements RequiresMainController, Requires
         alert.showAndWait();
     }
 
-    private void showConfirmationAlert(String title, String message) {
+    private void showConfirmationAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UNDECORATED);
         alert.setContentText(message);

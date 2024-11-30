@@ -19,6 +19,11 @@ public class LoginController implements RequiresMainController, LanguageChange {
 
     private NavigatorController navigatorController;
 
+    private String loginSucessfull;
+    private String loginErro;
+    private String loginPass;
+    private String loginErroMsg;
+
     @FXML
     private PasswordField passwordField;
 
@@ -65,12 +70,12 @@ public class LoginController implements RequiresMainController, LanguageChange {
         if (mainController.signIn(username, password)) {
             Usuario user = mainController.getUserByLogin(username);
             navigatorController.setLoggedUser(user);
-            showConfimationAlert("Operação realizada com sucesso", "Login realizado com sucesso!");
+            showConfimationAlert(loginSucessfull, loginPass);
             passwordField.clear();
 
             navigatorController.showMainPage();
         } else {
-            showErrorAlert("Erro de login", "Nome de usuário ou senha inválidos.");
+            showErrorAlert(loginErro, loginErroMsg);
         }
     }
 
@@ -108,6 +113,10 @@ public class LoginController implements RequiresMainController, LanguageChange {
         passwordField.setPromptText(LanguageManager.getString("field.password"));
         languageToggle.setText(LanguageManager.getString("button.language"));
         FontButton.setText(LanguageManager.getString("button.font"));
+        loginSucessfull = LanguageManager.getString("operation.sucess");
+        loginErro = LanguageManager.getString(("operation.error"));
+        loginPass = LanguageManager.getString("login.pass");
+        loginErroMsg = LanguageManager.getString("login.error");
     }
 
     public void changeLanguage(MouseEvent mouseEvent) {
