@@ -130,9 +130,18 @@ public class LoginController implements RequiresMainController, LanguageChange {
         LanguageManager.notifyListeners();
     }
 
+    public void changeFont(){
+        LanguageManager.notifyListeners();
+    }
+
     @Override
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
+    }
+
+    @Override
+    public void onLocalToggleFont() {
+        toggleFont();
     }
 
     /*
@@ -158,6 +167,5 @@ public class LoginController implements RequiresMainController, LanguageChange {
             signUpLink.getStyleClass().remove("label-link2");
         }
         LanguageManager.FontSizeController = !LanguageManager.FontSizeController;
-        LanguageManager.notifyListeners();
     }
 }

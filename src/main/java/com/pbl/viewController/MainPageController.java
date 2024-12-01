@@ -171,6 +171,10 @@ public class MainPageController implements RequiresMainController, RequiresUser,
     }
 
     @Override
+    public void onLocalToggleFont() {
+        LanguageManager.notifyListeners();
+    }
+
     public void toggleFont() {
 
     }

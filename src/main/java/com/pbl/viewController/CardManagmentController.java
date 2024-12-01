@@ -228,6 +228,10 @@ public class CardManagmentController implements RequiresMainController, Requires
     }
 
     @Override
+    public void onLocalToggleFont() {
+        LanguageManager.notifyListeners();
+    }
+
     public void toggleFont() {
 
     }

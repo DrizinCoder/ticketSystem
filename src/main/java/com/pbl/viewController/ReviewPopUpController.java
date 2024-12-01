@@ -141,6 +141,10 @@ public class ReviewPopUpController implements RequiresMainController, RequiresUs
     }
 
     @Override
+    public void onLocalToggleFont() {
+        LanguageManager.notifyListeners();
+    }
+
     public void toggleFont() {
 
     }
