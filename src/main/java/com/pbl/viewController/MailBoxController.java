@@ -71,7 +71,19 @@ public class MailBoxController implements RequiresMainController, RequiresUser, 
     }
 
     public void toggleFont() {
+        mails.getStyleClass().removeAll("labelEvent-message", "labelEvent-message2");
+        changeLanguage.getStyleClass().removeAll("button-cancel", "button-cancel2");
+        backButton.getStyleClass().removeAll("button-cancel", "button-cancel2");
 
+        if(!LanguageManager.FontSizeController){
+            mails.getStyleClass().add("labelEvent-message2");
+            changeLanguage.getStyleClass().add("button-cancel2");
+            backButton.getStyleClass().add("button-cancel2");
+        } else{
+            mails.getStyleClass().add("labelEvent-message");
+            changeLanguage.getStyleClass().add("button-cancel");
+            backButton.getStyleClass().add("button-cancel");
+        }
     }
 
     private void updateLanguage() {

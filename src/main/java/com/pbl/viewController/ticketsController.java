@@ -20,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.List;
@@ -131,7 +132,19 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
     }
 
     public void toggleFont() {
+        tickets.getStyleClass().removeAll("labelEvent-message", "labelEvent-message2");
+        changeLanguage.getStyleClass().removeAll("button-cancel", "button-cancel2");
+        backButton.getStyleClass().removeAll("button-cancel", "button-cancel2");
 
+        if(!LanguageManager.FontSizeController){
+            tickets.getStyleClass().add("labelEvent-message2");
+            changeLanguage.getStyleClass().add("button-cancel2");
+            backButton.getStyleClass().add("button-cancel2");
+        } else{
+            tickets.getStyleClass().add("labelEvent-message");
+            changeLanguage.getStyleClass().add("button-cancel");
+            backButton.getStyleClass().add("button-cancel");
+        }
     }
 
     public void handleReviewButton(Ingresso e){
@@ -148,6 +161,7 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
 
             Stage popupStage = new Stage();
             popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.initStyle(StageStyle.UNDECORATED);
             popupStage.setTitle("Avaliar Evento");
             popupStage.setScene(new Scene(root));
             popupStage.setResizable(false);

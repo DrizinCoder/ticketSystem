@@ -233,6 +233,21 @@ public class CardManagmentController implements RequiresMainController, Requires
     }
 
     public void toggleFont() {
+        cardTitle.getStyleClass().removeAll("text-title", "text-title2");
+        addCardButton.getStyleClass().removeAll("button-login", "button-login2");
+        backButton.getStyleClass().removeAll("button-cancel", "button-cancel2");
+        languageToggle.getStyleClass().removeAll("button-cancel", "button-cancel2");
 
+        if(!LanguageManager.FontSizeController){
+            cardTitle.getStyleClass().add("text-title2");
+            addCardButton.getStyleClass().add("button-login2");
+            languageToggle.getStyleClass().add("button-cancel2");
+            backButton.getStyleClass().add("button-cancel2");
+        } else{
+            cardTitle.getStyleClass().add("text-title");
+            addCardButton.getStyleClass().add("button-login");
+            languageToggle.getStyleClass().add("button-cancel");
+            backButton.getStyleClass().add("button-cancel");
+        }
     }
 }
