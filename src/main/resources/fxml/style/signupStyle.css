@@ -6,8 +6,20 @@
     -fx-text-fill: #F4F6F7;
 }
 
+.text-title2 {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F4F6F7;
+}
+
 .text-subtitle {
     -fx-font-size: 16px;
+    -fx-font-style: italic;
+    -fx-text-fill: #F4F6F7;
+}
+
+.text-subtitle2 {
+    -fx-font-size: 18px;
     -fx-font-style: italic;
     -fx-text-fill: #F4F6F7;
 }
@@ -50,6 +62,27 @@
     -fx-scale-y: 1.0;
 }
 
+.button-login2 {
+    -fx-background-color: rgb(22, 160, 133);
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-pref-width: 80%;
+}
+
+.button-login2:hover{
+    -fx-background-color: #1ABC9C;
+    -fx-cursor: hand;
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
+}
+
+.button-login2:pressed{
+    -fx-background-color: #148F77;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}
+
 .button-cancel {
     -fx-background-color: rgba(189, 195, 199, 0.02);
     -fx-border-color: rgba(200, 200, 200, 0.4);
@@ -66,6 +99,29 @@
 }
 
 .button-cancel:pressed{
+    -fx-background-color: rgba(133, 146, 158, 0.1);
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-cursor: normal;
+}
+
+.button-cancel2 {
+    -fx-background-color: rgba(189, 195, 199, 0.02);
+    -fx-border-color: rgba(200, 200, 200, 0.4);
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-pref-width: 80%;
+}
+
+.button-cancel2:hover{
+    -fx-background-color: rgba(166, 172, 175, 0.10);
+    -fx-cursor: hand;
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
+}
+
+.button-cancel2:pressed{
     -fx-background-color: rgba(133, 146, 158, 0.1);
     -fx-scale-x: 1.0;
     -fx-scale-y: 1.0;

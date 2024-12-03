@@ -156,6 +156,24 @@ public class PerfilController implements RequiresMainController, RequiresUser, L
     }
 
     public void toggleFont() {
+        titleLabel.getStyleClass().removeAll("text-title", "text-title2");
+        subtitleLabel.getStyleClass().removeAll("text-subtitle", "text-subtitle2");
+        confirmButton.getStyleClass().removeAll("button-login", "button-login2");
+        backButton.getStyleClass().removeAll("button-cancel", "button-cancel2");
+        languageToggle.getStyleClass().removeAll("button-cancel", "button-cancel2");
 
+        if(!LanguageManager.FontSizeController){
+            titleLabel.getStyleClass().add("text-title2");
+            subtitleLabel.getStyleClass().add("text-subtitle2");
+            confirmButton.getStyleClass().add("button-login2");
+            backButton.getStyleClass().add("button-cancel2");
+            languageToggle.getStyleClass().add("button-cancel2");
+        }else{
+            titleLabel.getStyleClass().add("text-title");
+            subtitleLabel.getStyleClass().add("text-subtitle");
+            confirmButton.getStyleClass().add("button-login");
+            backButton.getStyleClass().add("button-cancel");
+            languageToggle.getStyleClass().add("button-cancel");
+        }
     }
 }

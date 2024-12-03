@@ -46,6 +46,9 @@ public class SignupController  implements RequiresMainController, LanguageChange
     @FXML
     private Button languageToggle;
 
+    @FXML
+    private Button FontButton;
+
     private mainController mainController;
 
     private NavigatorController navigatorController;
@@ -143,6 +146,7 @@ public class SignupController  implements RequiresMainController, LanguageChange
         languageToggle.setText(LanguageManager.getString("button.language"));
         signUpErro = LanguageManager.getString("signUp.erro");
         signUpPass = LanguageManager.getString("signUp.pass");
+        FontButton.setText(LanguageManager.getString("button.font"));
     }
 
     public void changeLanguage(MouseEvent mouseEvent) {
@@ -168,6 +172,32 @@ public class SignupController  implements RequiresMainController, LanguageChange
     }
 
     public void toggleFont() {
+        titleLabel.getStyleClass().removeAll("text-title", "text-title2");
+        subtitleLabel.getStyleClass().removeAll("text-subtitle", "text-subtitle2");
+        confirmButton.getStyleClass().removeAll("button-login", "button-login2");
+        backButton.getStyleClass().removeAll("button-cancel", "button-cancel2");
+        languageToggle.getStyleClass().removeAll("button-cancel", "button-cancel2");
+        FontButton.getStyleClass().removeAll("button-cancel2", "button-cancel");
 
+        if(!LanguageManager.FontSizeController){
+            titleLabel.getStyleClass().add("text-title2");
+            subtitleLabel.getStyleClass().add("text-subtitle2");
+            confirmButton.getStyleClass().add("button-login2");
+            backButton.getStyleClass().add("button-cancel2");
+            languageToggle.getStyleClass().add("button-cancel2");
+            FontButton.getStyleClass().add("button-cancel2");
+        }else{
+            titleLabel.getStyleClass().add("text-title");
+            subtitleLabel.getStyleClass().add("text-subtitle");
+            confirmButton.getStyleClass().add("button-login");
+            backButton.getStyleClass().add("button-cancel");
+            languageToggle.getStyleClass().add("button-cancel");
+            FontButton.getStyleClass().add("button-cancel");
+        }
+    }
+
+    public void changeFont(ActionEvent actionEvent) {
+        LanguageManager.FontSizeController = !LanguageManager.FontSizeController;
+        LanguageManager.notifyListeners();
     }
 }
