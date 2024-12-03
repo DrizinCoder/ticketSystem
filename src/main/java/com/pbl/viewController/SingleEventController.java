@@ -206,6 +206,15 @@ public class SingleEventController implements RequiresMainController, RequiresUs
 
     public void toggleFont() {
         if(!LanguageManager.FontSizeController){
+            eventTittle.getStyleClass().removeAll("TittleFont", "text-title");
+            eventDescription.getStyleClass().removeAll("subtitleFont", "text-subtitle");
+            eventStatus.getStyleClass().removeAll("subtitleFont", "text-subtitle");
+            eventDate.getStyleClass().removeAll("subtitleFont", "text-subtitle");
+            Rate.getStyleClass().removeAll("subtitleFont", "text-subtitle");
+            cancelButton.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
+            purchaseButton.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
+            languageToggle.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
+
             eventTittle.getStyleClass().add("TittleFont");
             eventDescription.getStyleClass().add("subtitleFont");
             eventStatus.getStyleClass().add("subtitleFont");
@@ -215,14 +224,23 @@ public class SingleEventController implements RequiresMainController, RequiresUs
             purchaseButton.getStyleClass().add("buttonFontCancel");
             languageToggle.getStyleClass().add("buttonFontCancel");
         }else{
-            eventTittle.getStyleClass().remove("TittleFont");
-            eventDescription.getStyleClass().remove("subtitleFont");
-            eventStatus.getStyleClass().remove("subtitleFont");
-            eventDate.getStyleClass().remove("subtitleFont");
-            Rate.getStyleClass().remove("subtitleFont");
-            cancelButton.getStyleClass().remove("buttonFontCancel");
-            purchaseButton.getStyleClass().remove("buttonFontCancel");
-            languageToggle.getStyleClass().remove("buttonFontCancel");
+            eventTittle.getStyleClass().removeAll("TittleFont", "text-title");
+            eventDescription.getStyleClass().removeAll("subtitleFont", "text-subtitle");
+            eventStatus.getStyleClass().removeAll("subtitleFont", "text-subtitle");
+            eventDate.getStyleClass().removeAll("subtitleFont", "text-subtitle");
+            Rate.getStyleClass().removeAll("subtitleFont", "text-subtitle");
+            cancelButton.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
+            purchaseButton.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
+            languageToggle.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
+
+            eventTittle.getStyleClass().add("text-title");
+            eventDescription.getStyleClass().add("text-subtitle");
+            eventStatus.getStyleClass().add("text-subtitle");
+            eventDate.getStyleClass().add("text-subtitle");
+            Rate.getStyleClass().add("text-subtitle");
+            cancelButton.getStyleClass().add("button-cancel");
+            purchaseButton.getStyleClass().add("button-cancel");
+            languageToggle.getStyleClass().add("button-cancel");
         }
     }
 

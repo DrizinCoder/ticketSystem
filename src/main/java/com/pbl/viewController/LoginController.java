@@ -133,7 +133,6 @@ public class LoginController implements RequiresMainController, LanguageChange {
 
     public void changeFont(){
         LanguageManager.FontSizeController = !LanguageManager.FontSizeController;
-        System.out.println(LanguageManager.FontSizeController);
         LanguageManager.notifyListeners();
     }
 
@@ -152,16 +151,16 @@ public class LoginController implements RequiresMainController, LanguageChange {
     * */
 
     public void toggleFont() {
-        if(!LanguageManager.FontSizeController){
-            //Remove os estilos existentes
-            welcomeLabel.getStyleClass().removeAll("TittleFont", "text-title");
-            subtitleLabel.getStyleClass().removeAll("subtitleFont", "text-subtitle");
-            loginButton.getStyleClass().removeAll("buttonFontLogin", "button-login");
-            languageToggle.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
-            FontButton.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
-            noAccountMessage.getStyleClass().removeAll("label-message2", "label-message");
-            signUpLink.getStyleClass().removeAll("label-link", "label-link2");
+        //Remove os estilos existentes
+        welcomeLabel.getStyleClass().removeAll("TittleFont", "text-title");
+        subtitleLabel.getStyleClass().removeAll("subtitleFont", "text-subtitle");
+        loginButton.getStyleClass().removeAll("buttonFontLogin", "button-login");
+        languageToggle.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
+        FontButton.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
+        noAccountMessage.getStyleClass().removeAll("label-message2", "label-message");
+        signUpLink.getStyleClass().removeAll("label-link", "label-link2");
 
+        if(!LanguageManager.FontSizeController){
             //Aplica os estilos corretos
             welcomeLabel.getStyleClass().add("TittleFont");
             subtitleLabel.getStyleClass().add("subtitleFont");
@@ -171,15 +170,6 @@ public class LoginController implements RequiresMainController, LanguageChange {
             noAccountMessage.getStyleClass().add("label-message2");
             signUpLink.getStyleClass().add("label-link2");
         } else{
-            //Remove os estilos existentes
-            welcomeLabel.getStyleClass().removeAll("TittleFont", "text-title");
-            subtitleLabel.getStyleClass().removeAll("subtitleFont", "text-subtitle");
-            loginButton.getStyleClass().removeAll("buttonFontLogin", "button-login");
-            languageToggle.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
-            FontButton.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
-            noAccountMessage.getStyleClass().removeAll("label-message2", "label-message");
-            signUpLink.getStyleClass().removeAll("label-link", "label-link2");
-
             //Aplica os estilos corretos
             welcomeLabel.getStyleClass().add("text-title");
             subtitleLabel.getStyleClass().add("text-subtitle");

@@ -64,6 +64,9 @@ public class MainPageController implements RequiresMainController, RequiresUser,
     @FXML
     private VBox eventContainer;
 
+    @FXML
+    private Button FontButton;
+
     private Text eventDateMensage;
 
     public void initialize() {
@@ -87,9 +90,9 @@ public class MainPageController implements RequiresMainController, RequiresUser,
 
     private void updateUserData(){
         if (user != null && LanguageManager.languageController == 0) {
-            username.setText("Bem vindo\n" + user.getNome() + "!");
+            username.setText("Bem vindo!\n");
         } else if(user != null && LanguageManager.languageController == 1){
-            username.setText("Welcome\n" + user.getNome() + "!");
+            username.setText("Welcome!\n");
         }else if(LanguageManager.languageController == 0){
             username.setText("USUARIO NAO ENCONTRADO!");
         } else {
@@ -159,6 +162,7 @@ public class MainPageController implements RequiresMainController, RequiresUser,
         events.setText(LanguageManager.getString("events.title"));
         eventDateMensage.setText(LanguageManager.getString("events.date"));
         mailbox.setText(LanguageManager.getString("menu.mailbox"));
+        FontButton.setText(LanguageManager.getString("button.font"));
     }
 
     @Override
@@ -176,7 +180,37 @@ public class MainPageController implements RequiresMainController, RequiresUser,
     }
 
     public void toggleFont() {
+        username.getStyleClass().removeAll("label-message2", "label-message");
+        events.getStyleClass().removeAll("labelEvent-message2", "labelEvent-message2");
+        profile.getStyleClass().removeAll("button-menu2", "button-menu");
+        editButton.getStyleClass().removeAll("button-menu2", "button-menu");
+        seePurchasesButton.getStyleClass().removeAll("button-menu2", "button-menu");
+        changeLanguage.getStyleClass().removeAll("button-menu2", "button-menu");
+        logoutButton.getStyleClass().removeAll("button-menu2", "button-menu");
+        mailbox.getStyleClass().removeAll("button-menu2", "button-menu");
+        FontButton.getStyleClass().removeAll("button-menu2", "button-menu");
 
+        if(!LanguageManager.FontSizeController){
+            username.getStyleClass().add("label-message2");
+            events.getStyleClass().add("labelEvent-message2");
+            profile.getStyleClass().add("button-menu2");
+            editButton.getStyleClass().add("button-menu2");
+            seePurchasesButton.getStyleClass().add("button-menu2");
+            changeLanguage.getStyleClass().add("button-menu2");
+            logoutButton.getStyleClass().add("button-menu2");
+            mailbox.getStyleClass().add("button-menu2");
+            FontButton.getStyleClass().add("button-menu2");
+        }else{
+            username.getStyleClass().add("label-message");
+            events.getStyleClass().add("labelEvent-message");
+            profile.getStyleClass().add("button-menu");
+            editButton.getStyleClass().add("button-menu");
+            seePurchasesButton.getStyleClass().add("button-menu");
+            changeLanguage.getStyleClass().add("button-menu");
+            logoutButton.getStyleClass().add("button-menu");
+            mailbox.getStyleClass().add("button-menu");
+            FontButton.getStyleClass().add("button-menu");
+        }
     }
 
     public void handleEvent(MouseEvent mouseEvent, Evento e) throws IOException {
@@ -198,5 +232,10 @@ public class MainPageController implements RequiresMainController, RequiresUser,
 
     public void handleMailBox(MouseEvent mouseEvent) throws IOException {
         navigatorController.showMailBox();
+    }
+
+    public void changeFont(ActionEvent actionEvent) {
+        LanguageManager.FontSizeController = !LanguageManager.FontSizeController;
+        LanguageManager.notifyListeners();
     }
 }
