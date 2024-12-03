@@ -152,7 +152,7 @@ public class PerfilController implements RequiresMainController, RequiresUser, L
 
     @Override
     public void onLocalToggleFont() {
-        LanguageManager.notifyListeners();
+        toggleFont();
     }
 
     public void toggleFont() {

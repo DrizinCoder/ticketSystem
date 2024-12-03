@@ -164,7 +164,7 @@ public class SignupController  implements RequiresMainController, LanguageChange
 
     @Override
     public void onLocalToggleFont() {
-        LanguageManager.notifyListeners();
+        toggleFont();
     }
 
     public void toggleFont() {

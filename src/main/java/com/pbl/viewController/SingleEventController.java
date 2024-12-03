@@ -201,10 +201,29 @@ public class SingleEventController implements RequiresMainController, RequiresUs
 
     @Override
     public void onLocalToggleFont() {
-        LanguageManager.notifyListeners();
+        toggleFont();
     }
 
     public void toggleFont() {
+        if(!LanguageManager.FontSizeController){
+            eventTittle.getStyleClass().add("TittleFont");
+            eventDescription.getStyleClass().add("subtitleFont");
+            eventStatus.getStyleClass().add("subtitleFont");
+            eventDate.getStyleClass().add("subtitleFont");
+            Rate.getStyleClass().add("subtitleFont");
+            cancelButton.getStyleClass().add("buttonFontCancel");
+            purchaseButton.getStyleClass().add("buttonFontCancel");
+            languageToggle.getStyleClass().add("buttonFontCancel");
+        }else{
+            eventTittle.getStyleClass().remove("TittleFont");
+            eventDescription.getStyleClass().remove("subtitleFont");
+            eventStatus.getStyleClass().remove("subtitleFont");
+            eventDate.getStyleClass().remove("subtitleFont");
+            Rate.getStyleClass().remove("subtitleFont");
+            cancelButton.getStyleClass().remove("buttonFontCancel");
+            purchaseButton.getStyleClass().remove("buttonFontCancel");
+            languageToggle.getStyleClass().remove("buttonFontCancel");
+        }
     }
 
     public void loadReviews() {

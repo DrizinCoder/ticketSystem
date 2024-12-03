@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
@@ -131,6 +132,8 @@ public class LoginController implements RequiresMainController, LanguageChange {
     }
 
     public void changeFont(){
+        LanguageManager.FontSizeController = !LanguageManager.FontSizeController;
+        System.out.println(LanguageManager.FontSizeController);
         LanguageManager.notifyListeners();
     }
 
@@ -150,6 +153,16 @@ public class LoginController implements RequiresMainController, LanguageChange {
 
     public void toggleFont() {
         if(!LanguageManager.FontSizeController){
+            //Remove os estilos existentes
+            welcomeLabel.getStyleClass().removeAll("TittleFont", "text-title");
+            subtitleLabel.getStyleClass().removeAll("subtitleFont", "text-subtitle");
+            loginButton.getStyleClass().removeAll("buttonFontLogin", "button-login");
+            languageToggle.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
+            FontButton.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
+            noAccountMessage.getStyleClass().removeAll("label-message2", "label-message");
+            signUpLink.getStyleClass().removeAll("label-link", "label-link2");
+
+            //Aplica os estilos corretos
             welcomeLabel.getStyleClass().add("TittleFont");
             subtitleLabel.getStyleClass().add("subtitleFont");
             loginButton.getStyleClass().add("buttonFontLogin");
@@ -158,14 +171,23 @@ public class LoginController implements RequiresMainController, LanguageChange {
             noAccountMessage.getStyleClass().add("label-message2");
             signUpLink.getStyleClass().add("label-link2");
         } else{
-            welcomeLabel.getStyleClass().remove("TittleFont");
-            subtitleLabel.getStyleClass().remove("subtitleFont");
-            loginButton.getStyleClass().remove("buttonFontLogin");
-            languageToggle.getStyleClass().remove("buttonFontCancel");
-            FontButton.getStyleClass().remove("buttonFontCancel");
-            noAccountMessage.getStyleClass().remove("label-message2");
-            signUpLink.getStyleClass().remove("label-link2");
+            //Remove os estilos existentes
+            welcomeLabel.getStyleClass().removeAll("TittleFont", "text-title");
+            subtitleLabel.getStyleClass().removeAll("subtitleFont", "text-subtitle");
+            loginButton.getStyleClass().removeAll("buttonFontLogin", "button-login");
+            languageToggle.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
+            FontButton.getStyleClass().removeAll("buttonFontCancel", "button-cancel");
+            noAccountMessage.getStyleClass().removeAll("label-message2", "label-message");
+            signUpLink.getStyleClass().removeAll("label-link", "label-link2");
+
+            //Aplica os estilos corretos
+            welcomeLabel.getStyleClass().add("text-title");
+            subtitleLabel.getStyleClass().add("text-subtitle");
+            loginButton.getStyleClass().add("button-login");
+            languageToggle.getStyleClass().add("button-cancel");
+            FontButton.getStyleClass().add("button-cancel");
+            noAccountMessage.getStyleClass().add("label-message");
+            signUpLink.getStyleClass().add("label-link");
         }
-        LanguageManager.FontSizeController = !LanguageManager.FontSizeController;
     }
 }
