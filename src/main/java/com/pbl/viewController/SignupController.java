@@ -77,7 +77,15 @@ public class SignupController  implements RequiresMainController, LanguageChange
 
         if(verifyCredintials(login,password,cpf, email, username)) {
             if(verifyLogin(login)) {
-                mainController.signUp(login, password, username, cpf, email, false);
+                Usuario user = mainController.signUp(login, password, username, cpf, email, false);
+                navigatorController.setLoggedUser(user);
+
+                loginField.clear();
+                passwordField.clear();
+                usernameField.clear();
+                CpfField.clear();
+                emailField.clear();
+
                 showConfimationAlert(signUpPass);
                 navigatorController.showMainPage();
             } else {
