@@ -7,6 +7,7 @@ import com.pbl.controller.mainController;
 import com.pbl.models.Card;
 import com.pbl.models.Review;
 import com.pbl.models.Usuario;
+import com.sun.jdi.connect.IllegalConnectorArgumentsException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -20,10 +21,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 
 public class CardManagmentController implements RequiresMainController, RequiresUser, LanguageChange {
 
@@ -92,9 +90,13 @@ public class CardManagmentController implements RequiresMainController, Requires
         if(verifyCvv() && !cvvField.getText().isEmpty()) {
             int cvv = Integer.parseInt(cvvField.getText());
             if(verifyCredentials(holderName, cardNumber, expiryDate.toString())) {
-                mainController.addCreditCard(holderName, cardNumber, expiryDate, cvv, user.getID());
-                showConfirmationAlert(LanguageManager.getString("cardSucess"));
-                loadCard();
+                try {
+                    mainController.addCreditCard(holderName, cardNumber, expiryDate, cvv, user.getID());
+                    showConfirmationAlert(LanguageManager.getString("cardSucess"));
+                    loadCard();
+                } catch (IllegalArgumentException e) {
+                    showErrorAlert(e.getMessage());
+                }
             }
         }
     }

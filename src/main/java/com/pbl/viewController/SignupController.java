@@ -79,14 +79,14 @@ public class SignupController  implements RequiresMainController, LanguageChange
             if(verifyLogin(login)) {
                 Usuario user = mainController.signUp(login, password, username, cpf, email, false);
                 navigatorController.setLoggedUser(user);
-
+                showConfimationAlert(signUpPass);
                 loginField.clear();
                 passwordField.clear();
                 usernameField.clear();
                 CpfField.clear();
                 emailField.clear();
 
-                showConfimationAlert(signUpPass);
+
                 navigatorController.showMainPage();
             } else {
                 showErrorAlert(signUpErro);

@@ -55,7 +55,6 @@
     -fx-border-color: rgba(200, 200, 200, 0.4);
     -fx-text-fill: white;
     -fx-cursor: hand;
-    -fx-pref-width: 80%;
 }
 
 .button-cancel:hover{
@@ -206,7 +205,6 @@
     -fx-text-fill: white;
     -fx-font-size: 15px;
     -fx-cursor: hand;
-    -fx-pref-width: 80%;
 }
 
 .buttonFontCancel:hover{
