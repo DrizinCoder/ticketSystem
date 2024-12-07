@@ -84,12 +84,22 @@ public class PerfilController implements RequiresMainController, RequiresUser, L
         String username = usernameField.getText();
         String email = emailField.getText();
         if(verifyCredintials(login,password, email, username)) {
-            mainController.editPerfil(user, username, email, password, login);
-            Usuario userUpdated = mainController.getUserByID(user.getID());
-            messageLabel.setText(LanguageManager.getString("perfil.messageLabel"));
-            navigatorController.setLoggedUser(userUpdated);
-            LanguageManager.notifyListeners();
+            if(verifyLogin(login)) {
+                mainController.editPerfil(user, username, email, password, login);
+                Usuario userUpdated = mainController.getUserByID(user.getID());
+                messageLabel.setText(LanguageManager.getString("perfil.messageLabel"));
+                navigatorController.setLoggedUser(userUpdated);
+                LanguageManager.notifyListeners();
+            }
+            else{
+                messageLabel.setText(LanguageManager.getString("perfil.messageErrorLabel"));
+            }
         }
+    }
+
+    public boolean verifyLogin(String login){
+        Usuario user = mainController.getUserByLogin(login);
+        return user == null;
     }
 
     public void handleCancelButton(ActionEvent actionEvent) throws IOException {
