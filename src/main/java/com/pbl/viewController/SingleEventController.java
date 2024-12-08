@@ -26,6 +26,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * Controlador responsável por exibir as informações de um único evento, incluindo a compra de ingressos, avaliações e a troca de idioma.
+ * Implementa as interfaces necessárias para conectar com o controlador principal, o usuário e o evento.
+ */
 public class SingleEventController implements RequiresMainController, RequiresUser, RequiresEvent, LanguageChange {
 
     private com.pbl.controller.mainController mainController;
@@ -59,10 +63,19 @@ public class SingleEventController implements RequiresMainController, RequiresUs
     @FXML
     private ComboBox<String> seatSelector;
 
+    /**
+     * Inicializa o controlador, registrando o ouvinte de mudanças no idioma.
+     */
     public void initialize() {
         LanguageManager.registerListener(this);
     }
 
+    /**
+     * Define as dependências necessárias para o controlador.
+     *
+     * @param mainController O controlador principal.
+     * @param navigatorController O controlador de navegação.
+     */
     @Override
     public void setDependencies(mainController mainController, NavigatorController navigatorController) {
         this.mainController = mainController;
@@ -70,12 +83,22 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         LanguageManager.notifyListeners();
     }
 
+    /**
+     * Define o usuário atual para o controlador.
+     *
+     * @param user O usuário atual.
+     */
     @Override
     public void setUser(Usuario user) {
         this.user = user;
         loadPaymentSelector();
     }
 
+    /**
+     * Define o evento atual para o controlador.
+     *
+     * @param event O evento a ser exibido.
+     */
     @Override
     public void setEvent(Evento event) {
         this.event = event;
@@ -84,10 +107,22 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         loadSeatSelector();
     }
 
+    /**
+     * Manipula o clique no botão de saída, retornando à tela anterior.
+     *
+     * @param mouseEvent O evento gerado pelo clique.
+     * @throws IOException Se ocorrer um erro ao voltar à tela anterior.
+     */
     public void handleExitButton(MouseEvent mouseEvent) throws IOException {
         navigatorController.comeback();
     }
 
+    /**
+     * Manipula o clique no botão de compra de ingresso.
+     * Verifica os dados fornecidos pelo usuário e realiza a compra do ingresso.
+     *
+     * @param mouseEvent O evento gerado pelo clique.
+     */
     public void handlePurchaseButton(MouseEvent mouseEvent) {
         String paymentMethod = paymentSelector.getValue();
         Card card = null;
@@ -127,6 +162,13 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         }
     }
 
+    /**
+     * Verifica as credenciais fornecidas pelo usuário (método de pagamento e assento).
+     *
+     * @param paymentMethod O método de pagamento selecionado.
+     * @param seat O assento selecionado.
+     * @return true se as credenciais forem válidas, false caso contrário.
+     */
     public boolean verifyCredentials(String paymentMethod, String seat){
         if(Objects.equals(paymentMethod, "")){
            showErrorAlert(LanguageManager.getString("event.payment"));
@@ -138,6 +180,11 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         return true;
     }
 
+    /**
+     * Exibe uma mensagem de erro em um alerta.
+     *
+     * @param message A mensagem de erro a ser exibida.
+     */
     private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText(null);
@@ -147,6 +194,11 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         alert.showAndWait();
     }
 
+    /**
+     * Exibe uma mensagem de confirmação em um alerta.
+     *
+     * @param message A mensagem de confirmação a ser exibida.
+     */
     private void showConfirmationAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
@@ -156,6 +208,9 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         alert.showAndWait();
     }
 
+    /**
+     * Atualiza os dados do evento exibido na interface.
+     */
     private void updateEventData() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         mainController.calculateEventRating(event);
@@ -173,6 +228,9 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         eventStatus.setText(statusText);
     }
 
+    /**
+     * Atualiza os textos da interface com base no idioma atual.
+     */
     public void updateLanguage() {
         reviews.setText(LanguageManager.getString("event.review"));
         cancelButton.setText(LanguageManager.getString("button.cancel"));
@@ -181,6 +239,11 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         payslip = LanguageManager.getString("payslip");
     }
 
+    /**
+     * Altera o idioma da aplicação entre português e inglês.
+     *
+     * @param mouseEvent O evento gerado pelo clique no botão de troca de idioma.
+     */
     public void changeLanguage(MouseEvent mouseEvent) {
         if (LanguageManager.languageController == 0) {
             LanguageManager.setLocale(Locale.ENGLISH);
@@ -194,16 +257,30 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         loadPaymentSelector();
     }
 
+    /**
+     * Método chamado quando o idioma da aplicação é alterado.
+     * Atualiza os textos da interface.
+     *
+     * @param currentLocale O idioma atual da aplicação.
+     */
     @Override
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
     }
 
+    /**
+     * Método chamado quando a configuração de fonte é alterada.
+     * Ajusta o estilo de fonte na interface.
+     */
     @Override
     public void onLocalToggleFont() {
         toggleFont();
     }
 
+    /**
+     * Alterna o estilo da fonte entre uma configuração maior e menor, dependendo do estado do controlador de tamanho de fonte.
+     * Altera as classes CSS dos elementos da interface para ajustar o estilo de fonte.
+     */
     public void toggleFont() {
         if(!LanguageManager.FontSizeController){
             eventTittle.getStyleClass().removeAll("TittleFont", "text-title");
@@ -244,6 +321,10 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         }
     }
 
+    /**
+     * Carrega as avaliações do evento e as exibe na interface.
+     * Para cada avaliação, cria um VBox contendo o login do usuário, a avaliação numérica e o comentário.
+     */
     public void loadReviews() {
         List<Review> reviews = mainController.getEventsReview(event.getID());
 
@@ -271,6 +352,10 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         }
     }
 
+    /**
+     * Carrega o seletor de pagamento, populando com as opções de pagamento disponíveis,
+     * incluindo os cartões do usuário e o método de pagamento "Boleto".
+     */
     public void loadPaymentSelector() {
         ObservableList<String> paymentOptions = FXCollections.observableArrayList(payslip);
         List<Card> userCards = mainController.getUserCards(user.getID());
@@ -281,6 +366,9 @@ public class SingleEventController implements RequiresMainController, RequiresUs
         paymentSelector.setValue(payslip);
     }
 
+    /**
+     * Carrega o seletor de assentos, populando com os assentos disponíveis para o evento.
+     */
     public void loadSeatSelector() {
         ObservableList<String> seatOptions = FXCollections.observableArrayList();
         List<String> seats = mainController.getEventSeats(event.getID());

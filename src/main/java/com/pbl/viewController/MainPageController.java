@@ -69,12 +69,24 @@ public class MainPageController implements RequiresMainController, RequiresUser,
 
     private Text eventDateMensage;
 
+    /**
+     * Inicializa o controlador da página principal.
+     * Registra o controlador como ouvinte para mudanças de idioma e define a mensagem de data do evento.
+     */
     public void initialize() {
         LanguageManager.registerListener(this);
         eventDateMensage = new Text();
         eventDateMensage.setText(LanguageManager.getString("events.date"));
     }
 
+    /**
+     * Define as dependências necessárias para o controlador.
+     * Este método é chamado para inicializar as dependências, como o controlador principal e o controlador de navegação,
+     * e carrega os eventos ao iniciar a página.
+     *
+     * @param mainController O controlador principal da aplicação.
+     * @param navigatorController O controlador responsável pela navegação entre as páginas.
+     */
     @Override
     public void setDependencies(mainController mainController, NavigatorController navigatorController) {
         this.mainController = mainController;
@@ -83,11 +95,20 @@ public class MainPageController implements RequiresMainController, RequiresUser,
         LanguageManager.notifyListeners();
     }
 
+    /**
+     * Define o usuário atual na página principal.
+     * Atualiza as informações de boas-vindas com base no idioma atual.
+     *
+     * @param user O usuário a ser definido.
+     */
     public void setUser(Usuario user) {
         this.user = user;
         updateUserData();
     }
 
+    /**
+     * Atualiza os dados do usuário na interface gráfica, exibindo uma mensagem de boas-vindas ou erro de acordo com o idioma atual.
+     */
     private void updateUserData(){
         if (user != null && LanguageManager.languageController == 0) {
             username.setText("Bem vindo!\n");
@@ -100,11 +121,24 @@ public class MainPageController implements RequiresMainController, RequiresUser,
         }
     }
 
+    /**
+     * Lida com o evento de clique no botão "Logout".
+     * Esse método navega para a página anterior quando o usuário decide sair da aplicação.
+     *
+     * @param actionEvent O evento de ação gerado pelo clique no botão.
+     * @throws IOException Se ocorrer algum erro durante a navegação.
+     */
     @FXML
     private void handleLogout(ActionEvent actionEvent) throws IOException {
         navigatorController.comeback();
     }
 
+    /**
+     * Altera o idioma da aplicação entre inglês e português (Brasil).
+     * Notifica todos os ouvintes sobre a mudança de idioma.
+     *
+     * @param mouseEvent O evento de clique do mouse para acionar a troca de idioma.
+     */
     @FXML
     public void changeLanguage(MouseEvent mouseEvent) {
         if(LanguageManager.languageController == 0){
@@ -118,6 +152,10 @@ public class MainPageController implements RequiresMainController, RequiresUser,
         }
     }
 
+    /**
+     * Carrega e exibe os eventos disponíveis na página principal.
+     * Recupera os eventos do controlador principal e exibe as informações, como nome, descrição e data, na interface gráfica.
+     */
     private void loadEvents() {
         List<Evento> events = mainController.getAllEvents();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -153,6 +191,10 @@ public class MainPageController implements RequiresMainController, RequiresUser,
         }
     }
 
+    /**
+     * Atualiza os textos da interface gráfica de acordo com o idioma atual.
+     * Este método aplica os textos traduzidos nos rótulos e botões da página principal.
+     */
     public void updateLanguage(){
         profile.setText(LanguageManager.getString("menu.profile"));
         editButton.setText(LanguageManager.getString("menu.creditCards"));
@@ -165,6 +207,12 @@ public class MainPageController implements RequiresMainController, RequiresUser,
         FontButton.setText(LanguageManager.getString("button.font"));
     }
 
+    /**
+     * Método chamado quando ocorre uma mudança no idioma da aplicação.
+     * Atualiza os textos da interface para refletir o novo idioma e carrega novamente os eventos e dados do usuário.
+     *
+     * @param currentLocale O idioma atual da aplicação.
+     */
     @Override
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
@@ -174,11 +222,19 @@ public class MainPageController implements RequiresMainController, RequiresUser,
         updateUserData();
     }
 
+    /**
+     * Método chamado quando ocorre uma mudança no tamanho da fonte da aplicação.
+     * Ajusta o estilo dos componentes da interface de acordo com o novo tamanho de fonte.
+     */
     @Override
     public void onLocalToggleFont() {
         toggleFont();
     }
 
+    /**
+     * Altera o tamanho da fonte dos componentes da interface gráfica.
+     * Aplica os estilos corretos dependendo da configuração de fonte.
+     */
     public void toggleFont() {
         username.getStyleClass().removeAll("label-message2", "label-message");
         events.getStyleClass().removeAll("labelEvent-message2", "labelEvent-message2");
@@ -213,27 +269,69 @@ public class MainPageController implements RequiresMainController, RequiresUser,
         }
     }
 
+    /**
+     * Lida com o evento de clique em um evento na interface.
+     * Esse método injeta o evento selecionado no controlador de navegação e exibe os detalhes do evento.
+     *
+     * @param mouseEvent O evento de clique do mouse no evento.
+     * @param e O evento que foi clicado.
+     * @throws IOException Se ocorrer um erro ao carregar a página do evento.
+     */
     public void handleEvent(MouseEvent mouseEvent, Evento e) throws IOException {
         navigatorController.setEventOn(e); // Injeta o evento no NavigatorController
         navigatorController.showEvent();
     }
 
+    /**
+     * Lida com o evento de clique no botão de perfil.
+     * Esse método navega para a página de perfil do usuário.
+     *
+     * @param mouseEvent O evento de clique do mouse no botão de perfil.
+     * @throws IOException Se ocorrer um erro ao carregar a página de perfil.
+     */
     public void handleProfile(MouseEvent mouseEvent) throws IOException {
         navigatorController.showPerfil();
     }
 
+    /**
+     * Lida com o evento de clique no botão de cartões de crédito.
+     * Esse método navega para a página de gerenciamento de cartões de crédito.
+     *
+     * @param mouseEvent O evento de clique do mouse no botão de cartões.
+     * @throws IOException Se ocorrer um erro ao carregar a página de cartões de crédito.
+     */
     public void handleCard(MouseEvent mouseEvent) throws IOException {
         navigatorController.showCard();
     }
 
+    /**
+     * Lida com o evento de clique no botão de ingressos.
+     * Esse método navega para a página onde o usuário pode visualizar seus ingressos.
+     *
+     * @param mouseEvent O evento de clique do mouse no botão de ingressos.
+     * @throws IOException Se ocorrer um erro ao carregar a página de ingressos.
+     */
     public void handleTickets(MouseEvent mouseEvent) throws IOException {
         navigatorController.showTickets();
     }
 
+    /**
+     * Lida com o evento de clique no botão da caixa de entrada de mensagens.
+     * Esse método navega para a página de caixa de entrada de mensagens do usuário.
+     *
+     * @param mouseEvent O evento de clique do mouse no botão da caixa de entrada.
+     * @throws IOException Se ocorrer um erro ao carregar a página de caixa de entrada.
+     */
     public void handleMailBox(MouseEvent mouseEvent) throws IOException {
         navigatorController.showMailBox();
     }
 
+    /**
+     * Altera o tamanho da fonte na interface gráfica.
+     * Esse método alterna entre os tamanhos de fonte definidos e notifica os ouvintes sobre a mudança.
+     *
+     * @param actionEvent O evento de ação gerado ao clicar no botão de alteração de fonte.
+     */
     public void changeFont(ActionEvent actionEvent) {
         LanguageManager.FontSizeController = !LanguageManager.FontSizeController;
         LanguageManager.notifyListeners();

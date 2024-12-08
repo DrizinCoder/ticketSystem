@@ -40,10 +40,19 @@ public class MailBoxController implements RequiresMainController, RequiresUser, 
     private String thanksMensage2;
     private String payslip;
 
+    /**
+     * Inicializa o controlador da caixa de entrada. Registra o controlador como ouvinte para mudanças de idioma.
+     */
     public void initialize() {
         LanguageManager.registerListener(this);
     }
 
+    /**
+     * Altera o idioma da aplicação entre inglês e português (Brasil).
+     * Alterna o idioma conforme o estado atual do `LanguageManager.languageController` e notifica todos os ouvintes sobre a mudança de idioma.
+     *
+     * @param mouseEvent O evento de clique do mouse para acionar a troca de idioma.
+     */
     public void changeLanguage(MouseEvent mouseEvent) {
         if(LanguageManager.languageController == 0){
             LanguageManager.setLocale(Locale.ENGLISH);
@@ -56,20 +65,41 @@ public class MailBoxController implements RequiresMainController, RequiresUser, 
         loadPurchases();
     }
 
+    /**
+     * Lida com o evento de clique no botão "Voltar".
+     * Esse método navega de volta para a página anterior no aplicativo.
+     *
+     * @param mouseEvent O evento de clique do mouse para acionar o retorno à página anterior.
+     * @throws IOException Se ocorrer algum erro durante a navegação.
+     */
     public void hangleBackButton(MouseEvent mouseEvent) throws IOException {
         navigatorController.comeback();
     }
 
+    /**
+     * Método chamado quando ocorre uma mudança no idioma da aplicação.
+     * Atualiza os textos da interface gráfica para refletir o novo idioma.
+     *
+     * @param currentLocale O idioma atual da aplicação.
+     */
     @Override
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
     }
 
+    /**
+     * Método chamado quando ocorre uma mudança no tamanho da fonte da aplicação.
+     * Ele ajusta o estilo dos componentes da interface de acordo com o novo tamanho de fonte.
+     */
     @Override
     public void onLocalToggleFont() {
         toggleFont();
     }
 
+    /**
+     * Ajusta o estilo da fonte nos componentes da interface gráfica, alterando entre dois tamanhos de fonte.
+     * Aplica ou remove as classes de estilo apropriadas dependendo da configuração atual do tamanho da fonte.
+     */
     public void toggleFont() {
         mails.getStyleClass().removeAll("labelEvent-message", "labelEvent-message2");
         changeLanguage.getStyleClass().removeAll("button-cancel", "button-cancel2");
@@ -86,6 +116,10 @@ public class MailBoxController implements RequiresMainController, RequiresUser, 
         }
     }
 
+    /**
+     * Atualiza os textos da interface gráfica de acordo com o idioma atual.
+     * Este método aplica os textos traduzidos nos rótulos e botões da tela de caixa de entrada.
+     */
     private void updateLanguage() {
         mails.setText(LanguageManager.getString("menu.mailbox"));
         changeLanguage.setText(LanguageManager.getString("menu.changeLanguage"));
@@ -96,6 +130,13 @@ public class MailBoxController implements RequiresMainController, RequiresUser, 
         payslip = LanguageManager.getString("proofId");
     }
 
+    /**
+     * Define as dependências necessárias para o controlador.
+     * Este método é chamado para inicializar as dependências necessárias, como o controlador principal e o controlador de navegação.
+     *
+     * @param mainController O controlador principal da aplicação.
+     * @param navigatorController O controlador responsável pela navegação entre as páginas.
+     */
     @Override
     public void setDependencies(mainController mainController, NavigatorController navigatorController) {
         this.mainController = mainController;
@@ -103,12 +144,22 @@ public class MailBoxController implements RequiresMainController, RequiresUser, 
         LanguageManager.notifyListeners();
     }
 
+    /**
+     * Define o usuário atual.
+     * Esse método é chamado para configurar o usuário que está acessando a caixa de entrada e carregar suas compras.
+     *
+     * @param user O usuário que está acessando a caixa de entrada.
+     */
     @Override
     public void setUser(Usuario user) {
         this.user = user;
         loadPurchases();
     }
 
+    /**
+     * Carrega as compras do usuário e exibe as informações na caixa de entrada.
+     * Este método recupera as compras feitas pelo usuário através do controlador principal e exibe-as na interface gráfica.
+     */
     public void loadPurchases(){
         List<Purchase> purchases = mainController.getUserPurchases(user.getID());
 

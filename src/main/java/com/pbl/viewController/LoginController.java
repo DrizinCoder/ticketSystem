@@ -14,6 +14,11 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.Locale;
 
+/**
+ * Controlador responsável pela tela de login, gerenciando a autenticação do usuário, troca de idioma e ajuste do tamanho da fonte.
+ *
+ * Esta classe lida com eventos de login, exibe mensagens de erro ou sucesso e gerencia a troca de idiomas e tamanhos de fonte na interface.
+ */
 public class LoginController implements RequiresMainController, LanguageChange {
 
     private mainController mainController;
@@ -52,16 +57,30 @@ public class LoginController implements RequiresMainController, LanguageChange {
     @FXML
     private Button FontButton;
 
+    /**
+     * Inicializa o controlador e registra o ouvinte de mudança de idioma.
+     */
     public void initialize(){
         LanguageManager.registerListener(this);
     }
 
+    /**
+     * Define as dependências do controlador, como o controlador principal e o controlador de navegação.
+     *
+     * @param mainController O controlador principal da aplicação.
+     * @param navigatorController O controlador responsável pela navegação entre telas.
+     */
     public void setDependencies(mainController mainController, NavigatorController navigatorController) {
         this.mainController = mainController;
         this.navigatorController = navigatorController;
         LanguageManager.notifyListeners();
     }
 
+    /**
+     * Método acionado quando o botão de login é pressionado. Verifica as credenciais do usuário e redireciona para a tela principal em caso de sucesso.
+     *
+     * @throws IOException Se ocorrer algum erro durante a navegação para a próxima tela.
+     */
     @FXML
     protected void handleLoginButton() throws IOException {
         String username = usernameField.getText();
@@ -80,6 +99,12 @@ public class LoginController implements RequiresMainController, LanguageChange {
         }
     }
 
+    /**
+     * Exibe um alerta de erro com título e mensagem personalizados.
+     *
+     * @param title O título da mensagem de erro.
+     * @param message O conteúdo da mensagem de erro.
+     */
     private void showErrorAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(title);
@@ -90,6 +115,12 @@ public class LoginController implements RequiresMainController, LanguageChange {
         alert.showAndWait();
     }
 
+    /**
+     * Exibe um alerta de confirmação com título e mensagem personalizados.
+     *
+     * @param title O título da mensagem de confirmação.
+     * @param message O conteúdo da mensagem de confirmação.
+     */
     private void showConfimationAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -100,10 +131,21 @@ public class LoginController implements RequiresMainController, LanguageChange {
         alert.showAndWait();
     }
 
+    /**
+     * Redireciona o usuário para a tela de registro ao clicar no link de cadastro.
+     *
+     * @param mouseEvent O evento de clique do mouse.
+     * @throws IOException Se ocorrer algum erro durante a navegação.
+     */
     public void handleSignUpLink(MouseEvent mouseEvent) throws IOException {
         navigatorController.showSignUp();
     }
 
+    /**
+     * Atualiza os textos e rótulos da interface gráfica com base no idioma atual.
+     * Este método obtém as traduções apropriadas usando o `LanguageManager` e aplica os textos
+     * nos componentes gráficos da tela de login.
+     */
     public void updateLanguage(){
         welcomeLabel.setText(LanguageManager.getString("title.welcome"));
         subtitleLabel.setText(LanguageManager.getString("subtitle.credentials"));
@@ -120,6 +162,13 @@ public class LoginController implements RequiresMainController, LanguageChange {
         loginErroMsg = LanguageManager.getString("login.error");
     }
 
+    /**
+     * Alterna o idioma da aplicação entre inglês e português (Brasil).
+     * Este método altera o idioma com base no valor de `LanguageManager.languageController`
+     * e notifica todos os ouvintes sobre a mudança de idioma.
+     *
+     * @param mouseEvent O evento de clique do mouse para acionar a troca de idioma.
+     */
     public void changeLanguage(MouseEvent mouseEvent) {
         if(LanguageManager.languageController == 0){
             LanguageManager.setLocale(Locale.ENGLISH);
@@ -131,24 +180,43 @@ public class LoginController implements RequiresMainController, LanguageChange {
         LanguageManager.notifyListeners();
     }
 
+    /**
+     * Altera o tamanho da fonte da interface gráfica.
+     * O método alterna entre dois tamanhos de fonte (pequeno e grande) ao modificar o controlador `FontSizeController`.
+     *
+     * Este método também notifica os ouvintes para que a interface seja atualizada com o novo tamanho de fonte.
+     */
     public void changeFont(){
         LanguageManager.FontSizeController = !LanguageManager.FontSizeController;
         LanguageManager.notifyListeners();
     }
 
+    /**
+     * Método chamado quando ocorre uma mudança no idioma da aplicação.
+     * Ele atualiza os textos na interface gráfica para refletir o novo idioma.
+     *
+     * @param currentLocale O idioma atual da aplicação.
+     */
     @Override
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
     }
 
+    /**
+     * Método chamado quando ocorre uma mudança no tamanho da fonte da aplicação.
+     * Ele chama o método `toggleFont()` para ajustar o estilo dos componentes de interface de acordo com o novo tamanho da fonte.
+     */
     @Override
     public void onLocalToggleFont() {
         toggleFont();
     }
 
-    /*
-    * Toda classe de LanguageManager deve implementar ToggleFont para alterar o tamanho das paradas.
-    * */
+    /**
+     * Ajusta o estilo da fonte nos componentes da interface gráfica.
+     * Aplica ou remove as classes de estilo apropriadas de acordo com o tamanho da fonte selecionado (pequeno ou grande).
+     *
+     * Caso o controlador `FontSizeController` indique que a fonte deve ser maior, ele aplica estilos com fontes maiores; caso contrário, usa estilos de fontes menores.
+     */
 
     public void toggleFont() {
         //Remove os estilos existentes

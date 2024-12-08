@@ -26,6 +26,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Controlador da tela de ingressos do usuário. Responsável por exibir a lista de ingressos comprados,
+ * carregar as informações de cada ingresso, alterar o idioma da interface e permitir a avaliação dos eventos.
+ */
 public class ticketsController implements RequiresMainController, RequiresUser, LanguageChange {
 
     public Button changeLanguage;
@@ -45,10 +49,18 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
     private String seat;
     private String cost;
 
+    /**
+     * Inicializa o controlador, registrando-o como ouvinte para mudanças de idioma.
+     */
     public void initialize() {
         LanguageManager.registerListener(this);
     }
 
+    /**
+     * Define as dependências do controlador, incluindo o controlador principal e o controlador de navegação.
+     * @param mainController O controlador principal da aplicação.
+     * @param navigatorController O controlador de navegação.
+     */
     @Override
     public void setDependencies(mainController mainController, NavigatorController navigatorController) {
         this.mainController = mainController;
@@ -56,12 +68,20 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
         LanguageManager.notifyListeners();
     }
 
+    /**
+     * Define o usuário atual para o controlador e carrega os ingressos do usuário.
+     * @param user O usuário para o qual os ingressos serão carregados.
+     */
     @Override
     public void setUser(Usuario user) {
         this.usuario = user;
         loadTickets();
     }
 
+    /**
+     * Carrega e exibe os ingressos do usuário na interface. Para cada ingresso, é mostrado o evento correspondente,
+     * preço, assento e um botão de ação para avaliar o evento.
+     */
     public void loadTickets() {
         List<Ingresso> tickets = mainController.getUserIngressos(usuario);
 
@@ -101,6 +121,11 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
         }
     }
 
+    /**
+     * Altera o idioma da interface entre o inglês e o português.
+     * Atualiza os ingressos exibidos após a troca de idioma.
+     * @param mouseEvent O evento do clique do botão para mudar o idioma.
+     */
     public void changeLanguage(MouseEvent mouseEvent) {
         if(LanguageManager.languageController == 0){
             LanguageManager.setLocale(Locale.ENGLISH);
@@ -113,6 +138,9 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
         loadTickets();
     }
 
+    /**
+     * Atualiza os textos da interface de acordo com o idioma selecionado.
+     */
     public void updateLanguage() {
         tickets.setText(LanguageManager.getString("tickets.title"));
         changeLanguage.setText(LanguageManager.getString("menu.changeLanguage"));
@@ -121,16 +149,28 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
         cost = LanguageManager.getString("cost");
     }
 
+    /**
+     * Método de callback para a mudança de idioma.
+     * @param currentLocale O idioma atual.
+     */
     @Override
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
     }
 
+    /**
+     * Método de callback para alternar o tamanho da fonte da interface.
+     * Altera a classe CSS dos elementos de acordo com o tamanho da fonte configurado.
+     */
     @Override
     public void onLocalToggleFont() {
         toggleFont();
     }
 
+    /**
+     * Alterna o tamanho da fonte dos elementos da interface entre as configurações maior e menor.
+     * Atualiza as classes CSS associadas aos elementos da interface.
+     */
     public void toggleFont() {
         tickets.getStyleClass().removeAll("labelEvent-message", "labelEvent-message2");
         changeLanguage.getStyleClass().removeAll("button-cancel", "button-cancel2");
@@ -147,6 +187,10 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
         }
     }
 
+    /**
+     * Abre uma janela modal para permitir que o usuário faça uma avaliação sobre o evento.
+     * @param e O ingresso associado ao evento que será avaliado.
+     */
     public void handleReviewButton(Ingresso e){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ReviewEventPopup.fxml"));
@@ -173,6 +217,11 @@ public class ticketsController implements RequiresMainController, RequiresUser, 
 
     }
 
+    /**
+     * Navega para a tela anterior ao clicar no botão de voltar.
+     * @param mouseEvent O evento de clique no botão de voltar.
+     * @throws IOException Se ocorrer algum erro ao tentar voltar à tela anterior.
+     */
     public void hangleBackButton(MouseEvent mouseEvent) throws IOException {
         navigatorController.comeback();
     }

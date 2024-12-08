@@ -23,6 +23,10 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
+/**
+ * Controlador responsável pela gestão de cartões de crédito do usuário.
+ * Permite adicionar, remover e visualizar os cartões do usuário.
+ */
 public class CardManagmentController implements RequiresMainController, RequiresUser, LanguageChange {
 
     private mainController mainController;
@@ -62,6 +66,11 @@ public class CardManagmentController implements RequiresMainController, Requires
     private Text ExpiryDate;
     private Text CardNumberInfo;
 
+
+    /**
+     * Inicializa o controlador, registrando o ouvinte de alterações de idioma.
+     * Configura os textos iniciais de data de expiração e informações do número do cartão.
+     */
     public void initialize() {
         LanguageManager.registerListener(this);
         ExpiryDate = new Text();
@@ -70,6 +79,11 @@ public class CardManagmentController implements RequiresMainController, Requires
         CardNumberInfo.setText(LanguageManager.getString("CardNumberInfo"));
     }
 
+    /**
+     * Define as dependências do controlador, incluindo o controlador principal e o controlador de navegação.
+     * @param mainController Controlador principal da aplicação.
+     * @param navigatorController Controlador de navegação.
+     */
     @Override
     public void setDependencies(mainController mainController, NavigatorController navigatorController) {
         this.mainController = mainController;
@@ -77,12 +91,21 @@ public class CardManagmentController implements RequiresMainController, Requires
         LanguageManager.notifyListeners();
     }
 
+    /**
+     * Define o usuário atual e carrega os cartões associados a ele.
+     * @param user O usuário cujos cartões serão carregados.
+     */
     @Override
     public void setUser(Usuario user) {
         this.user = user;
         loadCard();
     }
 
+    /**
+     * Manipula o evento de adicionar um novo cartão.
+     * Verifica a validade dos dados inseridos e tenta adicionar o cartão ao sistema.
+     * @param actionEvent Evento disparado ao clicar no botão de adicionar cartão.
+     */
     public void handleAddCard(ActionEvent actionEvent) {
         String holderName = cardHolderNameField.getText();
         String cardNumber = cardNumberField.getText();
@@ -101,6 +124,10 @@ public class CardManagmentController implements RequiresMainController, Requires
         }
     }
 
+    /**
+     * Verifica se o CVV inserido é um número válido.
+     * @return true se o CVV for válido, false caso contrário.
+     */
     public boolean verifyCvv() {
         try {
                 Integer.parseInt(cvvField.getText());
@@ -111,6 +138,13 @@ public class CardManagmentController implements RequiresMainController, Requires
         }
     }
 
+    /**
+     * Verifica a validade dos dados inseridos para o nome do titular, número do cartão e data de expiração.
+     * @param holderName Nome do titular do cartão.
+     * @param cardNumber Número do cartão.
+     * @param expiryDate Data de expiração do cartão.
+     * @return true se todos os dados forem válidos, false caso contrário.
+     */
     public boolean verifyCredentials(String holderName, String cardNumber, String expiryDate) {
         if(Objects.equals(holderName, "")){
             showErrorAlert(LanguageManager.getString("cardErro"));
@@ -125,15 +159,29 @@ public class CardManagmentController implements RequiresMainController, Requires
         return true;
     }
 
+    /**
+     * Manipula a remoção de um cartão.
+     * @param card O cartão a ser removido.
+     */
     public void handleRemoveCard(Card card) {
         mainController.removeCreditCard(card);
         loadCard();
     }
 
+    /**
+     * Manipula o evento de voltar para a tela anterior.
+     * @param actionEvent Evento disparado ao clicar no botão de voltar.
+     * @throws IOException Se ocorrer um erro ao navegar para a tela anterior.
+     */
     public void handleBackButton(ActionEvent actionEvent) throws IOException {
         navigatorController.comeback();
     }
 
+    /**
+     * Converte uma data do tipo LocalDate para Date.
+     * @param localDate A data a ser convertida.
+     * @return A data convertida ou null se a conversão falhar.
+     */
     public Date convertDateType(LocalDate localDate) {
         if(localDate != null) {
             return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -143,6 +191,10 @@ public class CardManagmentController implements RequiresMainController, Requires
         }
     }
 
+    /**
+     * Exibe uma mensagem de alerta de erro.
+     * @param message A mensagem de erro a ser exibida.
+     */
     private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText(null);
@@ -152,6 +204,10 @@ public class CardManagmentController implements RequiresMainController, Requires
         alert.showAndWait();
     }
 
+    /**
+     * Exibe uma mensagem de confirmação.
+     * @param message A mensagem de confirmação a ser exibida.
+     */
     private void showConfirmationAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
@@ -161,6 +217,9 @@ public class CardManagmentController implements RequiresMainController, Requires
         alert.showAndWait();
     }
 
+    /**
+     * Carrega a lista de cartões do usuário e os exibe na interface.
+     */
     public void loadCard(){
         List<Card> cards = mainController.getUserCards(user.getID());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -198,6 +257,11 @@ public class CardManagmentController implements RequiresMainController, Requires
         }
     }
 
+    /**
+     * Atualiza os textos e elementos da interface de acordo com o idioma atual.
+     * Este método altera o conteúdo textual dos elementos gráficos baseando-se na configuração do idioma,
+     * utilizando a classe `LanguageManager` para acessar as traduções.
+     */
     public void updateLanguage(){
         cardTitle.setText(LanguageManager.getString("card.title"));
         addCardButton.setText(LanguageManager.getString("card.addButton"));
@@ -212,6 +276,12 @@ public class CardManagmentController implements RequiresMainController, Requires
         CardNumberInfo.setText(LanguageManager.getString("CardNumberInfo"));
     }
 
+    /**
+     * Alterna o idioma da interface entre inglês e português (Brasil).
+     * O método verifica o idioma atual e alterna para o outro idioma, atualizando a interface em tempo real.
+     *
+     * @param mouseEvent O evento de clique do mouse para alternar o idioma.
+     */
     public void changeLanguage(MouseEvent mouseEvent) {
         if (LanguageManager.languageController == 0) {
             LanguageManager.setLocale(Locale.ENGLISH);
@@ -224,16 +294,31 @@ public class CardManagmentController implements RequiresMainController, Requires
         loadCard();
     }
 
+    /**
+     * Método de callback acionado quando o idioma é alterado.
+     * Atualiza os elementos da interface com os textos correspondentes ao novo idioma.
+     *
+     * @param currentLocale O idioma atual configurado na aplicação.
+     */
     @Override
     public void onLocaleChange(Locale currentLocale) {
         updateLanguage();
     }
 
+    /**
+     * Método de callback acionado quando o tamanho da fonte é alterado.
+     * Este método altera a aparência dos elementos da interface gráfica com base no tamanho da fonte.
+     */
     @Override
     public void onLocalToggleFont() {
         toggleFont();
     }
 
+    /**
+     * Alterna entre diferentes estilos de fonte para os elementos da interface.
+     * Se a variável `LanguageManager.FontSizeController` for verdadeira, aplica um estilo de fonte maior.
+     * Caso contrário, aplica um estilo de fonte menor.
+     */
     public void toggleFont() {
         cardTitle.getStyleClass().removeAll("text-title", "text-title2");
         addCardButton.getStyleClass().removeAll("button-login", "button-login2");
